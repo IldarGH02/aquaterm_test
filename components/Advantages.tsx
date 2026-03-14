@@ -17,7 +17,7 @@ const Advantages: React.FC = () => {
         </h2>
         <div className="w-16 sm:w-24 h-1 sm:h-1.5 bg-[#d71e1e] rounded-full mb-4 sm:mb-6"></div>
         <p className="text-gray-600 text-xs sm:text-sm md:text-base lg:text-lg max-w-2xl leading-relaxed">
-          12 лет мы создаем комфорт в домах жителей Орловской области, 
+          15 лет мы создаем комфорт в домах жителей Орловской области, 
           сочетая инженерную точность с искренним сервисом.
         </p>
       </div>
@@ -55,7 +55,7 @@ const Advantages: React.FC = () => {
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-12 text-center relative z-10">
           <div className="flex flex-col items-center group">
-            <div className="text-3xl sm:text-5xl md:text-6xl font-black text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300">10<span className="text-[#d71e1e]">+</span></div>
+            <div className="text-3xl sm:text-5xl md:text-6xl font-black text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300">15<span className="text-[#d71e1e]">+</span></div>
             <div className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-blue-200 leading-tight">Лет на рынке</div>
           </div>
           
@@ -65,13 +65,13 @@ const Advantages: React.FC = () => {
           </div>
           
           <div className="flex flex-col items-center group relative lg:before:content-[''] lg:before:absolute lg:before:left-[-16px] lg:before:top-1/4 lg:before:h-1/2 lg:before:w-[1px] lg:before:bg-white/10">
-            <div className="text-3xl sm:text-5xl md:text-6xl font-black text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300">25<span className="text-[#d71e1e]">+</span></div>
+            <div className="text-3xl sm:text-5xl md:text-6xl font-black text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300">10<span className="text-[#d71e1e]">+</span></div>
             <div className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-blue-200 leading-tight">Специалистов</div>
           </div>
           
           <div className="flex flex-col items-center group relative before:hidden sm:before:content-[''] sm:before:absolute sm:before:left-[-16px] sm:before:top-1/4 sm:before:h-1/2 sm:before:w-[1px] sm:before:bg-white/10">
-            <div className="text-3xl sm:text-5xl md:text-6xl font-black text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300">3</div>
-            <div className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-blue-200 leading-tight">Магазина в Орле</div>
+            <div className="text-3xl sm:text-5xl md:text-6xl font-black text-white mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300">1</div>
+            <div className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-blue-200 leading-tight">Магазин в Орле</div>
           </div>
         </div>
       </div>

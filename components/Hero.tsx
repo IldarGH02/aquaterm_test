@@ -25,19 +25,15 @@ const Hero: React.FC<HeroProps> = ({ onCtaPrimary, onCtaSecondary }) => {
               <span className="text-[#d71e1e]">ПОД КЛЮЧ</span>
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl text-blue-100 mb-4 sm:mb-6 max-w-md leading-relaxed">
-              По договору, с фиксированной сметой и гарантией
-            </p>
-
             <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8 text-xs sm:text-sm md:text-base font-semibold uppercase tracking-wider text-blue-100/80">
               <span className="flex items-center"><Settings className="mr-2 text-[#d71e1e]" size={18} /> Проектирование</span>
               <span className="hidden sm:flex items-center"><Wrench className="mr-2 text-[#d71e1e]" size={18} /> Монтаж</span>
-              <span className="hidden sm:flex items-center"><Shield className="mr-2 text-[#d71e1e]" size={18} /> Обслуживание</span>
+              <span className="hidden sm:flex items-center"><Shield className="mr-2 text-[#d71e1e]" size={18} /> Сервис</span>
             </div>
             
             <p className="text-base sm:text-lg text-blue-100 mb-6 sm:mb-10 max-w-lg leading-relaxed border-l-4 border-[#d71e1e] pl-4">
-              Комплектуем и монтируем надежные котельные и системы водоочистки в Орле. 
-              <span className="text-white font-bold block mt-2">Официальная гарантия, свой склад запчастей и сервис 24/7.</span>
+              Комплектуем и монтируем надежные котельные и системы водоочистки в Орле и Орловской области. 
+              <span className="text-white font-bold block mt-2">Официальная гарантия, свой склад запчастей и сервис.</span>
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12">
@@ -57,7 +53,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaPrimary, onCtaSecondary }) => {
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 sm:space-x-8 text-[10px] sm:text-xs font-bold text-blue-200">
               <div className="flex items-center"><Shield className="mr-2 text-green-400" size={16} /> АВТОРИЗОВАННЫЙ СЕРВИС BAXI</div>
-              <div className="flex items-center"><Wrench className="mr-2 text-green-400" size={16} /> ОПЫТ РАБОТЫ 12 ЛЕТ</div>
+              <div className="flex items-center"><Wrench className="mr-2 text-green-400" size={16} /> ОПЫТ РАБОТЫ 15 ЛЕТ</div>
             </div>
           </div>
 

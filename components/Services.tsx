@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { SERVICES, ICON_MAP } from '../constants';
-import { ChevronRight, CheckCircle2 } from 'lucide-react';
+import { ChevronRight, CheckCircle2, ChevronDown } from 'lucide-react';
 
 interface ServicesProps {
   onCtaClick: () => void;
@@ -10,6 +10,7 @@ interface ServicesProps {
 const Services: React.FC<ServicesProps> = ({ onCtaClick }) => {
   const [activeTab, setActiveTab] = useState(SERVICES[0].id);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [expandedService, setExpandedService] = useState<string | null>(null);
 
   const activeService = SERVICES.find(s => s.id === activeTab) || SERVICES[0];
 
@@ -43,10 +44,7 @@ const Services: React.FC<ServicesProps> = ({ onCtaClick }) => {
             материалы и передовое оборудование от мировых лидеров.
           </p>
         </div>
-        <div className="flex space-x-2">
-            <div className="w-12 h-1.5 bg-[#d71e1e] rounded-full"></div>
-            <div className="w-6 h-1.5 bg-[#1a224f] rounded-full opacity-20"></div>
-        </div>
+        
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-12">
@@ -86,12 +84,26 @@ const Services: React.FC<ServicesProps> = ({ onCtaClick }) => {
                 <h3 className="text-lg sm:text-xl md:text-2xl font-black text-[#1a224f] uppercase tracking-wider">{activeService.title}</h3>
             </div>
 
-            <p className="text-base sm:text-lg md:text-xl text-gray-800 mb-4 sm:mb-6 md:mb-8 font-bold leading-snug">
-                {activeService.offer}
+            <p className="text-base sm:text-lg md:text-xl text-gray-800 mb-4 sm:mb-6 md:mb-8 font-bold leading-snug line-clamp-2">
+                {activeService.shortDesc}
             </p>
 
+            <button
+              onClick={() => setExpandedService(expandedService === activeService.id ? null : activeService.id)}
+              className="flex items-center text-[#1a224f] font-bold text-sm sm:text-base mb-4 sm:mb-6 md:mb-8 hover:text-[#d71e1e] transition-colors self-start"
+            >
+              {expandedService === activeService.id ? 'Свернуть' : 'Подробнее'}
+              <ChevronDown className={`ml-1 transition-transform duration-300 ${expandedService === activeService.id ? 'rotate-180' : ''}`} size={18} />
+            </button>
+
+            {expandedService === activeService.id && (
+              <p className="text-gray-700 mb-6 md:mb-10 animate-in fade-in slide-in-from-top-2 duration-300">
+                {activeService.offer}
+              </p>
+            )}
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 md:gap-4 mb-6 sm:mb-8 md:mb-10">
-                {activeService.works.map((item, idx) => (
+                {(expandedService === activeService.id ? activeService.works : activeService.works.slice(0, 3)).map((item, idx) => (
                   <div key={idx} className="flex items-start text-gray-700 font-medium group/item gap-2 sm:gap-2.5">
                     <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0 transition-colors group-hover/item:bg-[#d71e1e] group-hover/item:text-white mt-0.5">
                         <CheckCircle2 size={14} />
@@ -105,7 +117,7 @@ const Services: React.FC<ServicesProps> = ({ onCtaClick }) => {
               onClick={onCtaClick}
               className="w-full bg-[#1a224f] hover:bg-[#2a3575] text-white px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 rounded-xl sm:rounded-2xl font-bold uppercase tracking-wider transition-all flex items-center justify-center group shadow-lg active:scale-95 min-h-[44px] text-sm sm:text-base"
             >
-              Заказать решение
+              Заказать решение за 15 минут
               <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
             </button>
           </div>
