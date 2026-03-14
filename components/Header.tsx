@@ -91,20 +91,30 @@ const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
               className={`flex flex-col items-end border-l pl-6 transition-colors ${isScrolled ? 'border-gray-200 text-[#1a224f]' : 'border-white/20 text-white'}`}
             >
               <div className='space-y-1'>
-                <a
-                  href={`tel:${CONTACTS.phone1.replace(/\D/g, '')}`}
-                  className='font-bold text-lg hover:text-[#d71e1e] transition-colors block flex items-center'
-                  title='Инженерный центр'
-                >
-                  <Phone size={18} className='mr-2' />{CONTACTS.phone1}
-                </a>
-                <a
-                  href={`tel:${CONTACTS.phone2.replace(/\D/g, '')}`}
-                  className='font-bold text-lg hover:text-[#d71e1e] transition-colors block flex items-center'
-                  title='Сервисный центр'
-                >
-                  <Phone size={18} className='mr-2' />{CONTACTS.phone2}
-                </a>
+                <div className='relative group'>
+                  <a
+                    href={`tel:${CONTACTS.phone1.replace(/\D/g, '')}`}
+                    className='font-bold text-lg hover:text-[#d71e1e] transition-colors flex items-center'
+                  >
+                    <Phone size={18} className='mr-2' />{CONTACTS.phone1}
+                  </a>
+                  <div className='absolute -top-8 left-0 bg-[#1a224f] text-white text-xs font-semibold py-2 px-3 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none'>
+                    Инженерный центр
+                    <div className='absolute top-full left-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-[#1a224f]'></div>
+                  </div>
+                </div>
+                <div className='relative group'>
+                  <a
+                    href={`tel:${CONTACTS.phone2.replace(/\D/g, '')}`}
+                    className='font-bold text-lg hover:text-[#d71e1e] transition-colors flex items-center'
+                  >
+                    <Phone size={18} className='mr-2' />{CONTACTS.phone2}
+                  </a>
+                  <div className='absolute -top-8 left-0 bg-[#1a224f] text-white text-xs font-semibold py-2 px-3 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none'>
+                    Сервисный центр
+                    <div className='absolute top-full left-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-[#1a224f]'></div>
+                  </div>
+                </div>
               </div>
             </div>
             <button
@@ -153,20 +163,30 @@ const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
               </a>
             ))}
             <div className='pt-4 sm:pt-6 border-t space-y-3 sm:space-y-4'>
-              <a
-                href={`tel:${CONTACTS.phone1.replace(/\D/g, '')}`}
-                className='block text-lg sm:text-xl font-bold text-[#1a224f] hover:text-[#d71e1e] transition-colors flex items-center'
-                title='Инженерный центр'
-              >
-                <Phone size={18} className='mr-2' />{CONTACTS.phone1}
-              </a>
-              <a
-                href={`tel:${CONTACTS.phone2.replace(/\D/g, '')}`}
-                className='block text-lg sm:text-xl font-bold text-[#1a224f] hover:text-[#d71e1e] transition-colors flex items-center'
-                title='Сервисный центр'
-              >
-                <Phone size={18} className='mr-2' />{CONTACTS.phone2}
-              </a>
+              <div className='relative group'>
+                <a
+                  href={`tel:${CONTACTS.phone1.replace(/\D/g, '')}`}
+                  className='block text-lg sm:text-xl font-bold text-[#1a224f] hover:text-[#d71e1e] transition-colors flex items-center'
+                >
+                  <Phone size={18} className='mr-2' />{CONTACTS.phone1}
+                </a>
+                <div className='absolute -top-8 left-4 bg-[#1a224f] text-white text-xs font-semibold py-2 px-3 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none'>
+                  Инженерный центр
+                  <div className='absolute top-full left-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-[#1a224f]'></div>
+                </div>
+              </div>
+              <div className='relative group'>
+                <a
+                  href={`tel:${CONTACTS.phone2.replace(/\D/g, '')}`}
+                  className='block text-lg sm:text-xl font-bold text-[#1a224f] hover:text-[#d71e1e] transition-colors flex items-center'
+                >
+                  <Phone size={18} className='mr-2' />{CONTACTS.phone2}
+                </a>
+                <div className='absolute -top-8 left-4 bg-[#1a224f] text-white text-xs font-semibold py-2 px-3 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none'>
+                  Сервисный центр
+                  <div className='absolute top-full left-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-[#1a224f]'></div>
+                </div>
+              </div>
               <p className='text-sm sm:text-base text-gray-500'>{CONTACTS.address}</p>
             </div>
             <button
