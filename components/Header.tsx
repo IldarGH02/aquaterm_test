@@ -11,12 +11,24 @@ const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // ✅ ИСПРАВЛЕНО: Добавлен debounce для оптимизации
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+    
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setIsScrolled(window.scrollY > 20);
+      }, 100);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    // ✅ Использовать passive для лучшей производительности
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const navLinks = [
@@ -82,35 +94,46 @@ const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
           </nav>
 
           {/* Mobile toggle */}
-          <button className="lg:hidden p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X size={32} className="text-[#1a224f]" /> : <Menu size={32} className={isScrolled ? 'text-[#1a224f]' : 'text-white'} />}
+          <button 
+            className="lg:hidden p-3 sm:p-4 min-w-[48px] min-h-[48px] flex items-center justify-center rounded-lg transition-colors hover:bg-gray-100"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Закрыть меню" : "Открыть меню"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-nav"
+          >
+            {isMenuOpen ? <X size={28} className="text-[#1a224f]" /> : <Menu size={28} className={isScrolled ? 'text-[#1a224f]' : 'text-white'} />}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-white absolute top-full left-0 w-full shadow-2xl animate-in slide-in-from-top duration-300">
-          <nav className="flex flex-col p-6 space-y-4">
+        <div 
+          id="mobile-nav"
+          className="lg:hidden bg-white absolute top-full left-0 w-full shadow-2xl animate-in slide-in-from-top duration-300 z-40"
+          role="navigation"
+          aria-label="Мобильная навигация"
+        >
+          <nav className="flex flex-col p-4 sm:p-6 space-y-3 sm:space-y-4">
             {navLinks.map((link) => (
               <a 
                 key={link.name} 
                 href={link.href} 
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className="text-lg font-bold text-[#1a224f] hover:text-[#d71e1e]"
+                className="text-lg sm:text-xl font-bold text-[#1a224f] hover:text-[#d71e1e] transition-colors py-2"
               >
                 {link.name}
               </a>
             ))}
-            <div className="pt-4 border-t space-y-2">
-              <a href={`tel:${CONTACTS.phone1.replace(/\D/g, '')}`} className="block text-xl font-bold text-[#1a224f]">
+            <div className="pt-4 sm:pt-6 border-t space-y-3 sm:space-y-4">
+              <a href={`tel:${CONTACTS.phone1.replace(/\D/g, '')}`} className="block text-lg sm:text-xl font-bold text-[#1a224f] hover:text-[#d71e1e] transition-colors">
                 {CONTACTS.phone1}
               </a>
-              <p className="text-sm text-gray-500">{CONTACTS.address}</p>
+              <p className="text-sm sm:text-base text-gray-500">{CONTACTS.address}</p>
             </div>
             <button 
               onClick={() => { onCtaClick(); setIsMenuOpen(false); }}
-              className="bg-[#1a224f] text-white py-4 rounded font-bold uppercase tracking-wider"
+              className="bg-[#1a224f] text-white py-3 sm:py-4 rounded font-bold uppercase tracking-wider w-full min-h-[44px]"
             >
               Записаться на сервис
             </button>

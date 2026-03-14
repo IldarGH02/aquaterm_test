@@ -29,17 +29,17 @@ const Services: React.FC<ServicesProps> = ({ onCtaClick }) => {
 
   return (
     <div className="container mx-auto px-4">
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16 gap-4 md:gap-6">
         <div className="max-w-2xl">
-          <div className="inline-flex items-center space-x-2 text-[#d71e1e] font-black text-xs uppercase tracking-[0.3em] mb-4">
-             <div className="w-4 h-4 rounded-full border-2 border-[#d71e1e] animate-ping"></div>
+          <div className="inline-flex items-center space-x-2 text-[#d71e1e] font-black text-[10px] sm:text-xs uppercase tracking-[0.3em] mb-3 sm:mb-4">
+             <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-[#d71e1e] animate-ping"></div>
              <span>Инженерные решения</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-[#1a224f] mb-6 uppercase tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-[#1a224f] mb-4 sm:mb-6 uppercase tracking-tight">
             НАПРАВЛЕНИЯ <span className="text-[#d71e1e]">СЕРВИСА</span>
           </h2>
-          <p className="text-gray-600 text-lg">
-            Высокотехнологичный подход к комфорту. Используем современные 
+          <p className="text-gray-600 text-sm sm:text-base lg:text-lg">
+            Высокотехнологичный подход к комфорту. Используем современные
             материалы и передовое оборудование от мировых лидеров.
           </p>
         </div>
@@ -49,28 +49,28 @@ const Services: React.FC<ServicesProps> = ({ onCtaClick }) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-12">
         {SERVICES.map((s) => (
           <button
             key={s.id}
             onClick={() => handleTabChange(s.id)}
-            className={`flex flex-col items-start p-6 md:p-8 rounded-2xl transition-all duration-500 border-2 text-left group relative overflow-hidden ${
-              activeTab === s.id 
-                ? 'bg-[#1a224f] border-[#1a224f] text-white shadow-[0_20px_40px_-10px_rgba(26,34,79,0.4)] transform md:-translate-y-2' 
-                : 'bg-white border-gray-100 text-gray-700 hover:border-[#d71e1e]'
+            className={`flex flex-col items-start p-3 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl transition-all duration-300 border-2 text-left group relative overflow-hidden min-h-[120px] sm:min-h-[140px] ${
+              activeTab === s.id
+                ? 'bg-[#1a224f] border-[#1a224f] text-white shadow-lg md:shadow-[0_20px_40px_-10px_rgba(26,34,79,0.4)] transform md:-translate-y-1'
+                : 'bg-white border-gray-100 text-gray-700 hover:border-[#d71e1e] hover:shadow-md'
             }`}
           >
             {activeTab === s.id && (
               <div className="absolute -right-4 -top-4 w-24 h-24 bg-[#d71e1e] opacity-10 rounded-full blur-2xl"></div>
             )}
-            
-            <div className={`mb-4 md:mb-6 p-3 rounded-xl transition-all duration-500 ${
+
+            <div className={`mb-2 sm:mb-3 md:mb-4 p-2 sm:p-2.5 rounded-lg sm:rounded-xl transition-all duration-300 ${
               activeTab === s.id ? 'bg-[#d71e1e] text-white rotate-12 scale-110' : 'bg-gray-100 text-[#1a224f]'
             }`}>
-              {ICON_MAP[s.icon]}
+              {React.createElement(ICON_MAP[s.icon], { className: "w-5 h-5 sm:w-6 sm:h-6" })}
             </div>
-            <span className="font-black text-base md:text-xl uppercase tracking-wider mb-2">{s.title}</span>
-            <span className={`text-[10px] md:text-xs font-bold opacity-60 uppercase tracking-widest ${activeTab === s.id ? 'text-blue-100' : 'text-gray-400'}`}>
+            <span className="font-black text-xs sm:text-sm md:text-base uppercase leading-tight mb-1">{s.title}</span>
+            <span className={`text-[10px] sm:text-xs font-bold opacity-60 uppercase tracking-wider block ${activeTab === s.id ? 'text-blue-100' : 'text-gray-400'}`}>
               {s.shortDesc}
             </span>
           </button>
@@ -79,53 +79,62 @@ const Services: React.FC<ServicesProps> = ({ onCtaClick }) => {
 
       <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] shadow-[0_40px_80px_-20px_rgba(26,34,79,0.15)] overflow-hidden border border-gray-100 transition-all duration-500">
         <div className="grid lg:grid-cols-2">
-          {/* Content Panel */}
-          <div className={`p-8 md:p-16 lg:p-20 flex flex-col justify-center transition-all duration-500 ${isTransitioning ? 'opacity-0 translate-x-4' : 'opacity-100 translate-x-0'}`}>
-            <div className="flex items-center space-x-4 mb-6 md:mb-8">
-                <div className="w-12 h-1 bg-[#d71e1e] rounded-full"></div>
-                <h3 className="text-2xl md:text-3xl font-black text-[#1a224f] uppercase tracking-wider">{activeService.title}</h3>
+          {/* Content Panel */}  
+          <div className={`p-4 sm:p-6 md:p-10 lg:p-20 flex flex-col justify-center transition-all duration-300 ${isTransitioning ? 'opacity-0 translate-x-2' : 'opacity-100 translate-x-0'}`}>
+            <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4 mb-3 sm:mb-4 md:mb-6">
+                <div className="w-4 sm:w-6 h-0.5 sm:h-1 bg-[#d71e1e] rounded-full"></div>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-black text-[#1a224f] uppercase tracking-wider">{activeService.title}</h3>
             </div>
-            
-            <p className="text-xl md:text-2xl text-gray-800 mb-8 md:mb-10 font-bold leading-tight">
+
+            <p className="text-base sm:text-lg md:text-xl text-gray-800 mb-4 sm:mb-6 md:mb-8 font-bold leading-snug">
                 {activeService.offer}
             </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-10 md:mb-12">
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 md:gap-4 mb-6 sm:mb-8 md:mb-10">
                 {activeService.works.map((item, idx) => (
-                  <div key={idx} className="flex items-center text-gray-700 font-semibold group/item">
-                    <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center mr-3 md:mr-4 transition-colors group-hover/item:bg-[#d71e1e] group-hover/item:text-white">
-                        <CheckCircle2 size={16} />
+                  <div key={idx} className="flex items-start text-gray-700 font-medium group/item gap-2 sm:gap-2.5">
+                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0 transition-colors group-hover/item:bg-[#d71e1e] group-hover/item:text-white mt-0.5">
+                        <CheckCircle2 size={14} />
                     </div>
-                    <span className="text-xs md:text-sm uppercase tracking-wide">{item}</span>
+                    <span className="text-xs sm:text-sm uppercase leading-tight">{item}</span>
                   </div>
                 ))}
             </div>
 
-            <button 
+            <button
               onClick={onCtaClick}
-              className="w-full md:w-auto bg-[#1a224f] hover:bg-[#2a3575] text-white px-8 md:px-12 py-5 md:py-6 rounded-2xl font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center group shadow-2xl shadow-blue-900/20 active:scale-95"
+              className="w-full bg-[#1a224f] hover:bg-[#2a3575] text-white px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 rounded-xl sm:rounded-2xl font-bold uppercase tracking-wider transition-all flex items-center justify-center group shadow-lg active:scale-95 min-h-[44px] text-sm sm:text-base"
             >
               Заказать решение
-              <ChevronRight className="ml-3 group-hover:translate-x-2 transition-transform" />
+              <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
             </button>
           </div>
 
           {/* Image Panel */}
-          <div className="relative min-h-[400px] md:min-h-[500px] lg:min-h-auto bg-[#1a224f] overflow-hidden group/visual">
-            <div className={`absolute inset-0 transition-all duration-700 ease-in-out ${isTransitioning ? 'scale-110 opacity-0' : 'scale-100 opacity-100'}`}>
+          <div className="relative min-h-[250px] sm:min-h-[350px] md:min-h-[450px] lg:min-h-auto bg-[#1a224f] overflow-hidden group/visual aspect-[4/3] lg:aspect-auto">
+            <div className={`absolute inset-0 transition-all duration-500 ${isTransitioning ? 'scale-110 opacity-0' : 'scale-100 opacity-100'}`}>
 
                 <img
                   src={activeService.imageUrl}
                   alt={activeService.title}
                   onError={handleImageError}
+                  loading="lazy"
                   className="w-full h-full object-cover grayscale-[0.1] brightness-90 transition-transform duration-[3000ms] group-hover/visual:scale-105"
+                  style={{
+                    minHeight: '300px'
+                  }}
+                  width={1200}
+                  height={675}
                 />
 
                 {/* Дополнительное изображение */}
                 <img
                   src="/1.png"
-                  alt="Дополнительное изображение"
+                  alt=""
+                  aria-hidden="true"
                   className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay"
+                  width={1200}
+                  height={675}
                 />
             </div>
           </div>
