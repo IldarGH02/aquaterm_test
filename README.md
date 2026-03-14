@@ -4,14 +4,14 @@
 
 ![АКВАТЕРМ](public/1.png)
 
-[![React](https://img.shields.io/badge/React-18.3.1-61dafb?style=for-the-badge&logo=react)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.6.3-3178c6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-19.2.3-61dafb?style=for-the-badge&logo=react)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8.2-3178c6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.14-38bdf8?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
-[![Vite](https://img.shields.io/badge/Vite-6.0.1-646cff?style=for-the-badge&logo=vite)](https://vitejs.dev/)
+[![Vite](https://img.shields.io/badge/Vite-6.2.0-646cff?style=for-the-badge&logo=vite)](https://vitejs.dev/)
 
 **Профессиональные инженерные решения для отопления, водоснабжения и водоочистки в Орле**
 
-[🌐 Демо](https://vano-nine.vercel.app) • [📧 Контакты](#контакты) • [🚀 Быстрый старт](#локальный-запуск)
+[🌐 Демо](https://vano-nine.vercel.app) • [📧 Контакты](#контакты) • [🚀 Быстрый старт](#локальный-запуск) • [📊 Аудит](#-аудит-и-качество-кода)
 
 </div>
 
