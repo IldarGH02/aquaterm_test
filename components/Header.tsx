@@ -93,15 +93,17 @@ const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
               <div className='space-y-1'>
                 <a
                   href={`tel:${CONTACTS.phone1.replace(/\D/g, '')}`}
-                  className='font-bold text-lg hover:text-[#d71e1e] transition-colors block'
+                  className='font-bold text-lg hover:text-[#d71e1e] transition-colors block flex items-center'
+                  title='Инженерный центр'
                 >
-                  Инженерный центр {CONTACTS.phone1}
+                  <Phone size={18} className='mr-2' />{CONTACTS.phone1}
                 </a>
                 <a
                   href={`tel:${CONTACTS.phone2.replace(/\D/g, '')}`}
-                  className='font-bold text-lg hover:text-[#d71e1e] transition-colors block'
+                  className='font-bold text-lg hover:text-[#d71e1e] transition-colors block flex items-center'
+                  title='Сервисный центр'
                 >
-                  Сервисный центр {CONTACTS.phone2}
+                  <Phone size={18} className='mr-2' />{CONTACTS.phone2}
                 </a>
               </div>
             </div>
@@ -153,15 +155,17 @@ const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
             <div className='pt-4 sm:pt-6 border-t space-y-3 sm:space-y-4'>
               <a
                 href={`tel:${CONTACTS.phone1.replace(/\D/g, '')}`}
-                className='block text-lg sm:text-xl font-bold text-[#1a224f] hover:text-[#d71e1e] transition-colors'
+                className='block text-lg sm:text-xl font-bold text-[#1a224f] hover:text-[#d71e1e] transition-colors flex items-center'
+                title='Инженерный центр'
               >
-                Инженерный центр {CONTACTS.phone1}
+                <Phone size={18} className='mr-2' />{CONTACTS.phone1}
               </a>
               <a
                 href={`tel:${CONTACTS.phone2.replace(/\D/g, '')}`}
-                className='block text-lg sm:text-xl font-bold text-[#1a224f] hover:text-[#d71e1e] transition-colors'
+                className='block text-lg sm:text-xl font-bold text-[#1a224f] hover:text-[#d71e1e] transition-colors flex items-center'
+                title='Сервисный центр'
               >
-                Сервисный центр {CONTACTS.phone2}
+                <Phone size={18} className='mr-2' />{CONTACTS.phone2}
               </a>
               <p className='text-sm sm:text-base text-gray-500'>{CONTACTS.address}</p>
             </div>
