@@ -52,23 +52,15 @@ const ContactForm: React.FC<ContactFormProps> = ({ type, onSubmitSuccess }) => {
         timestamp: new Date().toISOString()
       }
 
-      // Сохранить локально (для тестирования)
-      const existingSubmissions = JSON.parse(localStorage.getItem('aquaterm_submissions') || '[]')
-      existingSubmissions.push(dataToSubmit)
-      localStorage.setItem('aquaterm_submissions', JSON.stringify(existingSubmissions))
-
-      console.log('✅ Заявка сохранена локально:', dataToSubmit)
-
-      // Попытка отправки на backend (если есть)
+      // Отправка на backend (если endpoint доступен)
       try {
-        const response = await fetch('/api/contact-form', {
+        await fetch('/api/contact-form', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(dataToSubmit)
         })
-        if (response.ok) console.log('✅ Заявка отправлена на backend')
       } catch {
-        console.log('ℹ️ Backend недоступен, используется локальное хранилище')
+        // На фронте без backend не блокируем UX: форма закрывается как обычно.
       }
 
       // Сброс формы и уведомление
@@ -171,7 +163,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ type, onSubmitSuccess }) => {
       </Button>
 
       <p className='text-[10px] text-center text-gray-400'>
-        Ваши данные защищены и не будут передано третьим лицам
+        Ваши данные защищены и не будут переданы третьим лицам
       </p>
     </form>
   )
