@@ -4,22 +4,42 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "npm run dev:crm",
+    "dev:front": "vite",
+    "dev:server": "tsx watch server/index.ts",
+    "dev:crm": "concurrently -k \"npm run dev:server\" \"npm run dev:front\"",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start:server": "tsx server/index.ts",
+    "test:crm": "tsx --test server/tests/**/*.test.ts"
   },
   "dependencies": {
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/cors": "^11.1.0",
+    "@fastify/rate-limit": "^10.3.0",
+    "argon2": "^0.44.0",
+    "better-sqlite3": "^12.4.1",
+    "fastify": "^5.6.2",
     "lucide-react": "^0.562.0",
     "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "react-dom": "^19.2.3",
+    "react-router-dom": "^7.9.4",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.2.1",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^22.14.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.0.0",
+    "autoprefixer": "^10.4.27",
     "clsx": "^2.1.1",
+    "concurrently": "^9.2.1",
+    "postcss": "^8.5.8",
     "tailwind-merge": "^3.5.0",
+    "tailwindcss": "^4.2.1",
+    "tsx": "^4.20.6",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
   }

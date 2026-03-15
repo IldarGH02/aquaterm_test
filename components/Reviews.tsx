@@ -30,7 +30,7 @@ const Reviews: React.FC = () => {
               ))}
             </div>
             <p className="text-gray-700 italic text-xs sm:text-sm md:text-base leading-relaxed mb-3 sm:mb-4">"{review.text}"</p>
-            <span className="text-[10px] sm:text-xs text-gray-400">{review.date}</span>
+            <span className="text-xs sm:text-sm text-gray-400">{review.date}</span>
           </div>
         ))}
       </div>

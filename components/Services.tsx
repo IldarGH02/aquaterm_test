@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { SERVICES, ICON_MAP } from '../constants';
 import { ChevronRight, CheckCircle2, ChevronDown } from 'lucide-react';
 
@@ -11,17 +11,29 @@ const Services: React.FC<ServicesProps> = ({ onCtaClick }) => {
   const [activeTab, setActiveTab] = useState(SERVICES[0].id);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [expandedService, setExpandedService] = useState<string | null>(null);
+  const transitionTimeoutRef = useRef<number | null>(null);
 
   const activeService = SERVICES.find(s => s.id === activeTab) || SERVICES[0];
 
   const handleTabChange = (id: string) => {
     if (id === activeTab) return;
+    if (transitionTimeoutRef.current) {
+      window.clearTimeout(transitionTimeoutRef.current);
+    }
     setIsTransitioning(true);
-    setTimeout(() => {
+    transitionTimeoutRef.current = window.setTimeout(() => {
       setActiveTab(id);
       setIsTransitioning(false);
     }, 300);
   };
+
+  useEffect(() => {
+    return () => {
+      if (transitionTimeoutRef.current) {
+        window.clearTimeout(transitionTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     e.currentTarget.src = 'https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&q=80&w=1200';
@@ -32,7 +44,7 @@ const Services: React.FC<ServicesProps> = ({ onCtaClick }) => {
     <div className="container mx-auto px-4">
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16 gap-4 md:gap-6">
         <div className="max-w-2xl">
-          <div className="inline-flex items-center space-x-2 text-[#d71e1e] font-black text-[10px] sm:text-xs uppercase tracking-[0.3em] mb-3 sm:mb-4">
+          <div className="inline-flex items-center space-x-2 text-[#d71e1e] font-black text-xs sm:text-sm uppercase tracking-[0.3em] mb-3 sm:mb-4">
              <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-[#d71e1e] animate-ping"></div>
              <span>Инженерные решения</span>
           </div>
@@ -68,7 +80,7 @@ const Services: React.FC<ServicesProps> = ({ onCtaClick }) => {
               {React.createElement(ICON_MAP[s.icon], { className: "w-5 h-5 sm:w-6 sm:h-6" })}
             </div>
             <span className="font-black text-xs sm:text-sm md:text-base uppercase leading-tight mb-1">{s.title}</span>
-            <span className={`text-[10px] sm:text-xs font-bold opacity-60 uppercase tracking-wider block ${activeTab === s.id ? 'text-blue-100' : 'text-gray-400'}`}>
+            <span className={`text-xs sm:text-sm font-bold opacity-60 uppercase tracking-wider block ${activeTab === s.id ? 'text-blue-100' : 'text-gray-400'}`}>
               {s.shortDesc}
             </span>
           </button>

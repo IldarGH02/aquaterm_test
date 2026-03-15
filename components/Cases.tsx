@@ -35,7 +35,7 @@ const Cases: React.FC = () => {
                   e.currentTarget.src = 'https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&q=80&w=800';
                 }}
               />
-              <div className="absolute top-2 sm:top-3 md:top-4 left-2 sm:left-3 md:left-4 bg-[#1a224f] text-white px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest z-10">
+              <div className="absolute top-2 sm:top-3 md:top-4 left-2 sm:left-3 md:left-4 bg-[#1a224f] text-white px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-black uppercase tracking-widest z-10">
                 {item.type}
               </div>
             </div>
@@ -50,19 +50,19 @@ const Cases: React.FC = () => {
                 </div>
                 <div className="flex items-center space-x-1 sm:space-x-2 text-gray-400 text-xs">
                   <Clock size={14} />
-                  <span className="text-[10px] sm:text-xs font-bold uppercase">{item.duration}</span>
+                  <span className="text-xs sm:text-sm font-bold uppercase">{item.duration}</span>
                 </div>
               </div>
 
               <div className="space-y-2 mb-4 sm:mb-6 text-xs sm:text-sm flex-grow">
                 <p className="text-gray-600 line-clamp-3 italic">"{item.problem}"</p>
                 <div className="p-2 sm:p-3 bg-gray-50 rounded-lg">
-                  <span className="font-bold text-[#1a224f] text-[10px] uppercase block mb-1">Что сделано:</span>
-                  <p className="text-gray-500 text-[10px] sm:text-xs leading-tight">{item.solution}</p>
+                  <span className="font-bold text-[#1a224f] text-xs uppercase block mb-1">Что сделано:</span>
+                  <p className="text-gray-500 text-xs sm:text-sm leading-tight">{item.solution}</p>
                 </div>
               </div>
 
-              <div className="flex items-start p-2 sm:p-3 bg-green-50 rounded-xl text-green-700 border border-green-100 gap-1 sm:gap-2 text-[10px] sm:text-[11px]">
+              <div className="flex items-start p-2 sm:p-3 bg-green-50 rounded-xl text-green-700 border border-green-100 gap-1 sm:gap-2 text-xs sm:text-sm">
                 <CheckCircle size={14} className="mt-0.5 flex-shrink-0" />
                 <span className="font-bold leading-tight">{item.result}</span>
               </div>

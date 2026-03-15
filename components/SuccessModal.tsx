@@ -103,7 +103,7 @@ const SuccessModal: React.FC<SuccessModalProps> = ({
           </button>
 
           {/* Подпись */}
-          <p className="text-[10px] sm:text-xs text-gray-400 mt-4 sm:mt-6">
+          <p className="text-xs sm:text-sm text-gray-400 mt-4 sm:mt-6">
             Закроется автоматически через {autoCloseDelay / 1000} сек.
           </p>
         </div>

@@ -7,7 +7,7 @@ const Process: React.FC = () => {
     <div className="container mx-auto px-4">
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-14 md:mb-16 gap-4 sm:gap-6">
         <div className="max-w-2xl">
-          <div className="inline-flex items-center space-x-2 text-[#d71e1e] font-black text-[10px] sm:text-xs uppercase tracking-[0.3em] mb-3 sm:mb-4">
+          <div className="inline-flex items-center space-x-2 text-[#d71e1e] font-black text-xs sm:text-sm uppercase tracking-[0.3em] mb-3 sm:mb-4">
              <div className="w-3 sm:w-4 h-3 sm:h-4 rounded-full border-2 border-[#d71e1e] flex items-center justify-center">
                 <div className="w-1 sm:w-1.5 h-1 sm:h-1.5 bg-[#d71e1e] rounded-full"></div>
              </div>

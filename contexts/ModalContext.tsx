@@ -90,10 +90,11 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
         size="md"
         closeOnOverlayClick={true}
         closeOnEscape={true}
+        labelledBy="contact-modal-title"
       >
         <div className="text-left">
           <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-xl sm:text-2xl font-black text-[#1a224f] uppercase tracking-wider mb-2">
+            <h2 id="contact-modal-title" className="text-xl sm:text-2xl font-black text-[#1a224f] uppercase tracking-wider mb-2">
               {modal.type === 'consultation' ? 'КОНСУЛЬТАЦИЯ' : 
                modal.type === 'engineer' ? 'ВЫЗОВ ИНЖЕНЕРА' : 
                modal.type === 'cost' ? 'РАСЧЕТ СТОИМОСТИ' : ''}

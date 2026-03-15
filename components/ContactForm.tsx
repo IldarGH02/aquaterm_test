@@ -162,7 +162,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ type, onSubmitSuccess }) => {
         {form.isSubmitting ? 'Отправка...' : 'Отправить заявку'}
       </Button>
 
-      <p className='text-[10px] text-center text-gray-400'>
+      <p className='text-xs text-center text-gray-400'>
         Ваши данные защищены и не будут переданы третьим лицам
       </p>
     </form>

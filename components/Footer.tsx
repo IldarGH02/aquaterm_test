@@ -1,10 +1,11 @@
 
 import React from 'react';
-import { MapPin, Phone, Mail, Instagram, MessageCircle, Globe, ChevronUp } from 'lucide-react';
+import { MapPin, Phone, Mail, MessageCircle, Globe, ChevronUp } from 'lucide-react';
 import { CONTACTS } from '../constants';
 
 const Footer: React.FC = () => {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  const websiteUrl = CONTACTS.website.startsWith('http') ? CONTACTS.website : `https://${CONTACTS.website}`;
 
   return (
     <footer className="bg-[#1a224f] text-white pt-12 sm:pt-16 md:pt-20 pb-6 sm:pb-8 md:pb-10 relative overflow-hidden">
@@ -19,7 +20,7 @@ const Footer: React.FC = () => {
                 <span className="logo-font text-2xl sm:text-3xl tracking-tighter text-white">АКВА</span>
                 <span className="logo-font text-2xl sm:text-3xl tracking-tighter text-[#d71e1e]">ТЕРМ</span>
               </div>
-              <div className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] border-t-2 border-white mt-[-2px] text-white">
+              <div className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] border-t-2 border-white mt-[-2px] text-white">
                 инженерно - сервисный центр
               </div>
             </div>
@@ -28,11 +29,21 @@ const Footer: React.FC = () => {
               обслуживание инженерных систем в Орле и области.
             </p>
             <div className="flex space-x-2 sm:space-x-3">
-              <a href="#" className="w-9 sm:w-10 h-9 sm:h-10 border border-white/10 rounded flex items-center justify-center hover:bg-[#d71e1e] hover:border-[#d71e1e] transition-all min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0">
+              <a
+                href={`mailto:${CONTACTS.email}`}
+                className="w-9 sm:w-10 h-9 sm:h-10 border border-white/10 rounded flex items-center justify-center hover:bg-[#d71e1e] hover:border-[#d71e1e] transition-all min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0"
+                aria-label="Написать на email"
+              >
                 <MessageCircle size={16} />
               </a>
-              <a href="#" className="w-9 sm:w-10 h-9 sm:h-10 border border-white/10 rounded flex items-center justify-center hover:bg-[#d71e1e] hover:border-[#d71e1e] transition-all min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0">
-                <Instagram size={16} />
+              <a
+                href={websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 sm:w-10 h-9 sm:h-10 border border-white/10 rounded flex items-center justify-center hover:bg-[#d71e1e] hover:border-[#d71e1e] transition-all min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0"
+                aria-label="Открыть сайт компании"
+              >
+                <Globe size={16} />
               </a>
             </div>
           </div>
@@ -74,26 +85,26 @@ const Footer: React.FC = () => {
           <div className="flex flex-col justify-between">
             <div>
               <h4 className="text-xs sm:text-sm font-black uppercase tracking-widest mb-4 sm:mb-6 md:mb-8 text-[#d71e1e]">На связи</h4>
-              <p className="text-[10px] sm:text-xs text-blue-100/50 mb-4 sm:mb-6 font-medium">Работаем ежедневно. Прием заявок на сайте — круглосуточно.</p>
+              <p className="text-xs text-blue-100/50 mb-4 sm:mb-6 font-medium">Работаем ежедневно. Прием заявок на сайте — круглосуточно.</p>
               <div className="bg-white/5 p-3 sm:p-4 rounded-lg border border-white/10">
-                <div className="text-[10px] font-black uppercase tracking-widest text-blue-100/40 mb-1">Сайт</div>
+                <div className="text-xs font-black uppercase tracking-widest text-blue-100/40 mb-1">Сайт</div>
                 <div className="text-sm sm:text-base md:text-lg font-black break-all">{CONTACTS.website}</div>
               </div>
             </div>
             <button 
               onClick={scrollToTop}
-              className="mt-6 sm:mt-8 flex items-center justify-center gap-1 text-[10px] font-black uppercase tracking-[0.3em] text-white/30 hover:text-white transition-colors group min-h-[44px]"
+              className="mt-6 sm:mt-8 flex items-center justify-center gap-1 text-xs font-black uppercase tracking-[0.3em] text-white/30 hover:text-white transition-colors group min-h-[44px]"
             >
               Вверх <ChevronUp size={12} className="group-hover:-translate-y-1 transition-transform" />
             </button>
           </div>
         </div>
 
-        <div className="pt-6 sm:pt-8 md:pt-10 border-t border-white/10 flex flex-col gap-3 sm:gap-0 md:flex-row md:justify-between md:items-center text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-blue-100/30">
+        <div className="pt-6 sm:pt-8 md:pt-10 border-t border-white/10 flex flex-col gap-3 sm:gap-0 md:flex-row md:justify-between md:items-center text-xs font-bold uppercase tracking-widest text-blue-100/30">
           <p>© {new Date().getFullYear()} Инженерно-сервисный центр Акватерм. Орел.</p>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 md:gap-8">
-            <a href="#" className="hover:text-white transition-colors">Политика конфиденциальности</a>
-            <a href="#" className="hover:text-white transition-colors">Карта сайта</a>
+            <a href="/privacy-policy.html" className="hover:text-white transition-colors">Политика конфиденциальности</a>
+            <a href="/sitemap.xml" className="hover:text-white transition-colors">Карта сайта</a>
           </div>
         </div>
       </div>
@@ -102,4 +113,3 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
-

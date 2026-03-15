@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 import { cn } from '@/lib/utils/cn'
 
@@ -23,6 +23,10 @@ export interface ModalProps {
   hideBackdrop?: boolean
   /** Текст для кнопки закрытия (для доступности) */
   closeButtonLabel?: string
+  /** ID элемента с заголовком диалога */
+  labelledBy?: string
+  /** Текстовая метка, если нет заголовка */
+  ariaLabel?: string
 }
 
 const sizeClasses = {
@@ -53,27 +57,77 @@ export const Modal: React.FC<ModalProps> = ({
   closeOnEscape = true,
   className = '',
   hideBackdrop = false,
-  closeButtonLabel = 'Закрыть'
+  closeButtonLabel = 'Закрыть',
+  labelledBy,
+  ariaLabel = 'Диалоговое окно'
 }) => {
-  // Обработчик нажатия Escape
-  const handleEscape = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'Escape' && closeOnEscape && isOpen) {
-      onClose()
-    }
-  }, [closeOnEscape, isOpen, onClose])
+  const dialogRef = useRef<HTMLDivElement>(null)
 
-  // Блокировка скролла body при открытом модальном окне
+  // Блокировка скролла + focus trap при открытом модальном окне
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-      document.addEventListener('keydown', handleEscape)
+    if (!isOpen) return
+
+    const previousOverflow = document.body.style.overflow
+    const previouslyFocused = document.activeElement as HTMLElement | null
+    document.body.style.overflow = 'hidden'
+
+    const focusableSelector = [
+      'a[href]',
+      'button:not([disabled])',
+      'input:not([disabled])',
+      'select:not([disabled])',
+      'textarea:not([disabled])',
+      '[tabindex]:not([tabindex="-1"])'
+    ].join(', ')
+
+    const getFocusableElements = () => {
+      const root = dialogRef.current
+      if (!root) return [] as HTMLElement[]
+      return Array.from(root.querySelectorAll<HTMLElement>(focusableSelector))
     }
+
+    const focusable = getFocusableElements()
+    if (focusable.length > 0) {
+      focusable[0].focus()
+    } else {
+      dialogRef.current?.focus()
+    }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && closeOnEscape) {
+        onClose()
+        return
+      }
+
+      if (e.key !== 'Tab') return
+
+      const currentFocusable = getFocusableElements()
+      if (currentFocusable.length === 0) {
+        e.preventDefault()
+        dialogRef.current?.focus()
+        return
+      }
+
+      const first = currentFocusable[0]
+      const last = currentFocusable[currentFocusable.length - 1]
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      document.body.style.overflow = 'unset'
-      document.removeEventListener('keydown', handleEscape)
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', handleKeyDown)
+      previouslyFocused?.focus()
     }
-  }, [isOpen, handleEscape])
+  }, [isOpen, closeOnEscape, onClose])
 
   if (!isOpen) return null
 
@@ -96,6 +150,8 @@ export const Modal: React.FC<ModalProps> = ({
 
       {/* Модальное окно */}
       <div
+        ref={dialogRef}
+        tabIndex={-1}
         className={cn(
           'bg-white rounded-3xl w-full relative z-10 animate-in zoom-in duration-300 shadow-[0_0_50px_rgba(0,0,0,0.3)] overflow-hidden',
           sizeClasses[size],
@@ -103,7 +159,8 @@ export const Modal: React.FC<ModalProps> = ({
         )}
         role="dialog"
         aria-modal="true"
-        aria-labelledby="modal-title"
+        aria-labelledby={labelledBy}
+        aria-label={labelledBy ? undefined : ariaLabel}
       >
         {/* Декоративный элемент сверху */}
         <div className="h-1 sm:h-2 bg-gradient-to-r from-[#d71e1e] via-[#1a224f] to-[#d71e1e]" />

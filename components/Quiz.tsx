@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { QUIZ_STEPS } from '../constants';
 import { ChevronLeft, Check, Gift, Timer, Calculator, ArrowRight } from 'lucide-react';
 import { PhoneValidator } from '@/lib/validation/phone.validator';
@@ -18,14 +18,32 @@ const Quiz: React.FC<{ onSubmitSuccess?: () => void }> = ({ onSubmitSuccess }) =
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [isFinished, setIsFinished] = useState(false);
+  const stepTimeoutRef = useRef<number | null>(null);
+  const submitTimeoutRef = useRef<number | null>(null);
+  const isMountedRef = useRef(true);
+
+  useEffect(() => {
+    return () => {
+      isMountedRef.current = false;
+      if (stepTimeoutRef.current) {
+        window.clearTimeout(stepTimeoutRef.current);
+      }
+      if (submitTimeoutRef.current) {
+        window.clearTimeout(submitTimeoutRef.current);
+      }
+    };
+  }, []);
 
   // Выбор ответа
   const handleSelect = useCallback((option: string) => {
     setAnswers(prev => ({ ...prev, [currentStep]: option }));
+    if (stepTimeoutRef.current) {
+      window.clearTimeout(stepTimeoutRef.current);
+    }
     if (currentStep < QUIZ_STEPS.length - 1) {
-      setTimeout(() => setCurrentStep(prev => prev + 1), 400);
+      stepTimeoutRef.current = window.setTimeout(() => setCurrentStep(prev => prev + 1), 400);
     } else {
-      setTimeout(() => setIsFinished(true), 400);
+      stepTimeoutRef.current = window.setTimeout(() => setIsFinished(true), 400);
     }
   }, [currentStep]);
 
@@ -51,9 +69,12 @@ const Quiz: React.FC<{ onSubmitSuccess?: () => void }> = ({ onSubmitSuccess }) =
     validators: contactFormValidators,
     autoSanitize: false,
     sanitizableFields: ['name', 'phone'],
-    onSubmit: async (values) => {
+    onSubmit: async () => {
       // Имитация API вызова (задержка 1.5 сек)
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await new Promise<void>((resolve) => {
+        submitTimeoutRef.current = window.setTimeout(resolve, 1500);
+      });
+      if (!isMountedRef.current) return;
 
       // Сброс состояния квиза
       setCurrentStep(0);
@@ -238,7 +259,7 @@ const Quiz: React.FC<{ onSubmitSuccess?: () => void }> = ({ onSubmitSuccess }) =
                 >
                   Получить расчет и скидку
                 </Button>
-                <div className="flex items-center justify-center space-x-2 text-[10px] text-gray-400 uppercase font-bold tracking-widest">
+                <div className="flex items-center justify-center space-x-2 text-xs text-gray-400 uppercase font-bold tracking-widest">
                    <ShieldCheckIcon /> <span>Ваши данные под защитой</span>
                 </div>
               </form>
