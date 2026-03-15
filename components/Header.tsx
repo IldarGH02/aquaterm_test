@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Phone, MapPin } from 'lucide-react';
+import { Menu, X, Wrench, Phone } from 'lucide-react';
 import { CONTACTS } from '../constants';
+import { PhonePopover } from './PhonePopover';
 
 interface HeaderProps {
   onCtaClick: () => void;
@@ -76,7 +77,7 @@ const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
           </a>
 
           {/* Desktop Nav */}
-          <nav className='hidden lg:flex items-center space-x-6'>
+          <nav className='hidden lg:flex items-stretch space-x-6'>
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -88,30 +89,24 @@ const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
               </a>
             ))}
             <div
-              className={`flex flex-col items-end border-l pl-6 transition-colors ${isScrolled ? 'border-gray-200 text-[#1a224f]' : 'border-white/20 text-white'}`}
+              className={`flex flex-col items-end border-l pl-4 md:pl-6 transition-colors min-w-[140px] md:min-w-[180px] flex-shrink-0 ${isScrolled ? 'border-gray-200 text-[#1a224f]' : 'border-white/20 text-white'}`}
             >
-              <div className='space-y-1'>
-                <a
-                  href={`tel:${CONTACTS.phone1.replace(/\D/g, '')}`}
-                  className='font-bold text-lg hover:text-[#d71e1e] transition-colors block'
-                >
-                  Инженерный центр {CONTACTS.phone1}
-                </a>
-                <a
-                  href={`tel:${CONTACTS.phone2.replace(/\D/g, '')}`}
-                  className='font-bold text-lg hover:text-[#d71e1e] transition-colors block'
-                >
-                  Сервисный центр {CONTACTS.phone2}
-                </a>
+              <div className='space-y-2'>
+                <PhonePopover phone={CONTACTS.phone1} label="Инженерный центр" icon={<Phone size={18} />} />
+                <PhonePopover phone={CONTACTS.phone2} label="Сервисный центр" icon={<Wrench size={18} />} />
               </div>
             </div>
-            <button
-              onClick={onCtaClick}
-              className='bg-[#1a224f] hover:bg-[#2a3575] text-white px-6 py-2.5 rounded shadow-lg font-bold text-xs uppercase tracking-widest transition-all active:scale-95'
-            >
-              Вызвать инженера
-            </button>
-            <span className='text-[15px] opacity-70'>Работаем с 09:00 до 19:00</span>
+            <div className='flex flex-col xl:flex-row xl:items-center space-y-2 xl:space-y-0 xl:space-x-4'>
+              <button
+                onClick={onCtaClick}
+                className='bg-[#1a224f] hover:bg-[#2a3575] text-white px-6 py-2.5 rounded shadow-lg font-bold text-xs uppercase tracking-widest transition-all active:scale-95'
+              >
+                Вызвать инженера
+              </button>
+              <span className={`font-bold ${isScrolled ? 'text-[#1a224f]' : 'text-white'} text-sm md:text-base lg:text-lg whitespace-normal`}>
+                Работаем с 09:00 до 19:00
+              </span>
+            </div>
           </nav>
 
           {/* Mobile toggle */}
@@ -150,20 +145,37 @@ const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
                 {link.name}
               </a>
             ))}
-            <div className='pt-4 sm:pt-6 border-t space-y-3 sm:space-y-4'>
-              <a
-                href={`tel:${CONTACTS.phone1.replace(/\D/g, '')}`}
-                className='block text-lg sm:text-xl font-bold text-[#1a224f] hover:text-[#d71e1e] transition-colors'
-              >
-                Инженерный центр {CONTACTS.phone1}
-              </a>
-              <a
-                href={`tel:${CONTACTS.phone2.replace(/\D/g, '')}`}
-                className='block text-lg sm:text-xl font-bold text-[#1a224f] hover:text-[#d71e1e] transition-colors'
-              >
-                Сервисный центр {CONTACTS.phone2}
-              </a>
+            <div className='pt-4 sm:pt-6 border-t space-y-4'>
+              <div className='flex items-start gap-3'>
+                <div className='p-2 bg-[#1a224f]/10 rounded-lg shrink-0'>
+                  <Phone size={20} className="text-[#1a224f]" />
+                </div>
+                <div className='min-w-0'>
+                  <p className='text-xs text-gray-500 uppercase tracking-wider mb-1'>Инженерный центр</p>
+                  <a
+                    href={`tel:${CONTACTS.phone1.replace(/\D/g, '')}`}
+                    className='text-lg font-bold text-[#1a224f] hover:text-[#d71e1e] break-all transition-colors block'
+                  >
+                    {CONTACTS.phone1}
+                  </a>
+                </div>
+              </div>
+              <div className='flex items-start gap-3'>
+                <div className='p-2 bg-[#d71e1e]/10 rounded-lg shrink-0'>
+                  <Wrench size={20} className="text-[#d71e1e]" />
+                </div>
+                <div className='min-w-0'>
+                  <p className='text-xs text-gray-500 uppercase tracking-wider mb-1'>Сервисный центр</p>
+                  <a
+                    href={`tel:${CONTACTS.phone2.replace(/\D/g, '')}`}
+                    className='text-lg font-bold text-[#1a224f] hover:text-[#d71e1e] break-all transition-colors block'
+                  >
+                    {CONTACTS.phone2}
+                  </a>
+                </div>
+              </div>
               <p className='text-sm sm:text-base text-gray-500'>{CONTACTS.address}</p>
+              <p className='text-base sm:text-lg font-bold text-[#1a224f]'>Работаем с 09:00 до 19:00</p>
             </div>
             <button
               onClick={() => {
