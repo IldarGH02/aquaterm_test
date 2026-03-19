@@ -1,4 +1,4 @@
-import { crmRequest } from '@/crm/api/http';
+import { crmRequest } from './http';
 import type {
   CrmNotification,
   CrmTask,
@@ -11,7 +11,7 @@ import type {
   TaskPriority,
   TaskStatus,
   UserRole,
-} from '@/crm/types';
+} from '../types';
 
 export interface LoginInput {
   login: string;

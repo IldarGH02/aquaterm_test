@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Bell, ChartColumnStacked, LogOut, SquareKanban, UserCog2, X } from 'lucide-react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { crmApi } from '@/crm/api/crmApi';
-import { useCrmAuth } from '@/crm/contexts/CrmAuthContext';
-import type { CrmNotification } from '@/crm/types';
+import { crmApi } from '../api/crmApi';
+import { useCrmAuth } from '../contexts/CrmAuthContext';
+import type { CrmNotification } from '../types';
 
 function formatDateTime(value: string): string {
   return new Intl.DateTimeFormat('ru-RU', {

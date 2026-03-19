@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import type { UserRole } from '@/crm/types';
-import { useCrmAuth } from '@/crm/contexts/CrmAuthContext';
+import type { UserRole } from '../types';
+import { useCrmAuth } from '../contexts/CrmAuthContext';
 
 interface RequireCrmRoleProps {
   roles: UserRole[];

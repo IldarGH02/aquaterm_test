@@ -1,7 +1,7 @@
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { crmApi } from '@/crm/api/crmApi';
-import { ApiError } from '@/crm/api/http';
-import type { CrmUser } from '@/crm/types';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { crmApi} from '../api/crmApi';
+import { ApiError } from '../api/http';
+import type { CrmUser } from '../types';
 
 interface CrmAuthContextValue {
   user: CrmUser | null;

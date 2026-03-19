@@ -12,10 +12,10 @@ import {
   SendHorizontal,
   UserRound,
 } from 'lucide-react';
-import { Button, Input, Modal, Select } from '@/components/ui';
-import { crmApi } from '@/crm/api/crmApi';
-import type { CreateTaskInput } from '@/crm/api/crmApi';
-import { useCrmAuth } from '@/crm/contexts/CrmAuthContext';
+import { Button, Input, Modal, Select } from '@shared/ui';
+import { crmApi } from '../api/crmApi';
+import type { CreateTaskInput } from '../api/crmApi';
+import { useCrmAuth } from '../contexts/CrmAuthContext';
 import {
   TASK_PRIORITY_OPTIONS,
   TASK_STATUS_OPTIONS,
@@ -25,7 +25,7 @@ import {
   type TaskEvent,
   type TaskPriority,
   type TaskStatus,
-} from '@/crm/types';
+} from '../types';
 
 type DeadlineFilter = 'ALL' | 'OVERDUE' | 'TODAY' | 'WEEK';
 type DetailTab = 'CHAT' | 'HISTORY';

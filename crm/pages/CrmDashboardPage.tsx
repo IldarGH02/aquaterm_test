@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Activity, Clock3, Loader2, OctagonAlert, RefreshCcw, SquareCheck, Timer } from 'lucide-react';
-import { Button } from '@/components/ui';
-import { crmApi } from '@/crm/api/crmApi';
-import type { DashboardCompletionItem, DashboardOverview, DashboardWorkloadItem } from '@/crm/types';
+import { Button } from '@shared/ui';
+import { crmApi } from '../api/crmApi';
+import type { DashboardCompletionItem, DashboardOverview, DashboardWorkloadItem } from '../types';
 
 const emptyOverview: DashboardOverview = {
   open: 0,

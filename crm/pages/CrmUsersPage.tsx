@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { KeyRound, Loader2, ShieldUser, UserPlus2 } from 'lucide-react';
-import { Button, Input, Select } from '@/components/ui';
-import { crmApi } from '@/crm/api/crmApi';
-import { USER_ROLE_OPTIONS, type CrmUser, type UserRole } from '@/crm/types';
+import { Button, Input, Select } from '@shared/ui';
+import { crmApi } from '../api/crmApi';
+import { USER_ROLE_OPTIONS, type CrmUser, type UserRole } from '../types';
 
 interface CreateUserFormState {
   login: string;

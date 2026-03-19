@@ -1,9 +1,9 @@
 import { StrictMode } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
-import App from '@/App';
-import { ModalProvider } from '@/contexts/ModalContext';
-import { CrmAuthProvider } from '@/crm/contexts/CrmAuthContext';
+import App from './src/app/App';
+import { ModalProvider } from './src/shared/providers/modalProvider';
+import { CrmAuthProvider } from './crm/contexts/CrmAuthContext';
 import './index.css';
 
 const rootElement = document.getElementById('root');
