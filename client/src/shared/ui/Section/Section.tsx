@@ -3,12 +3,13 @@ import { ReactNode, FC } from "react";
 interface ISection {
   children: ReactNode;
   className?: string;
+  id?: string;
 }
 
-export const Section: FC<ISection> = ({children, className}) => {
+export const Section: FC<ISection> = ({children, className, id}) => {
   return (
-    <div className={className}>
+    <section className={className} id={id}>
       { children }
-    </div>
+    </section>
   )
 }

@@ -1,2 +1,2 @@
 // Barrel export для кастомных хуков
-export { useForm } from './useForm.ts'
+export { useForm } from './useForm.tsx'

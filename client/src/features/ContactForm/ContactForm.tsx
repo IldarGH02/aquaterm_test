@@ -1,8 +1,7 @@
-import React, { useCallback, useMemo } from 'react'
-import { PhoneValidator } from '@shared/lib/validation/phone.validator.ts'
+import { useCallback, useState, FC, ChangeEvent } from 'react'
 import { sanitizeInput, sanitizePhone } from '@shared/lib/sanitization/input.sanitizer.ts'
-import { required, minLength, compose } from '@shared/lib/validation/form.validator.ts'
-import { useForm } from '@features/hooks/useForm.ts'
+import { contactFormValidators } from "@features/ContactForm/ui/validator.ts";
+import { useForm } from '@features/hooks/useForm.tsx'
 import { Input, Select, Button } from '@shared/ui'
 
 interface ContactFormProps {
@@ -18,21 +17,9 @@ const SERVICE_OPTIONS = [
   { value: 'complex', label: 'Комплекс под ключ' }
 ]
 
-const ContactForm: React.FC<ContactFormProps> = ({ type, onSubmitSuccess }) => {
-  const [isPrivacyChecked, setIsPrivacyChecked] = React.useState(false)
-
-  // Валидаторы для формы
-  const validators = useMemo(() => ({
-    name: compose(
-      required('Пожалуйста, введите ваше имя'),
-      minLength(2, 'Имя должно содержать минимум 2 символа')
-    ),
-    phone: compose(
-      required('Пожалуйста, введите номер телефона'),
-      (phone: string) => PhoneValidator.validate(phone) ? null : 'Пожалуйста, введите корректный номер (8-920-123-45-67)'
-    ),
-    service: required('Выберите услугу')
-  }), [])
+export const ContactForm: FC<ContactFormProps> = ({ type, onSubmitSuccess }) => {
+  const [isPrivacyChecked, setIsPrivacyChecked] = useState(false)
+  const validators = contactFormValidators
 
   // Инициализация формы
   const form = useForm({
@@ -71,7 +58,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ type, onSubmitSuccess }) => {
   })
 
   // Обработчики изменений с санитизацией
-  const handleNameChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNameChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value
     const sanitized = sanitizeInput(rawValue)
     if (sanitized.length <= 100) {
@@ -79,7 +66,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ type, onSubmitSuccess }) => {
     }
   }, [form])
 
-  const handlePhoneChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePhoneChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     let rawValue = e.target.value
     rawValue = rawValue.replace(/[^\d\s\-+()]/g, '')
     const sanitized = sanitizePhone(rawValue)
@@ -88,7 +75,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ type, onSubmitSuccess }) => {
     }
   }, [form])
 
-  const handleServiceChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleServiceChange = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     form.handleChange('service', e.target.value)
   }, [form])
 
@@ -168,5 +155,3 @@ const ContactForm: React.FC<ContactFormProps> = ({ type, onSubmitSuccess }) => {
     </form>
   )
 }
-
-export default ContactForm

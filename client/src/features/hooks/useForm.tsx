@@ -160,5 +160,3 @@ export function useForm<T extends Record<string, any>>({
     isValid
   }
 }
-
-export default useForm

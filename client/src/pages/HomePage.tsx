@@ -12,7 +12,7 @@ import { Quiz } from '@features/Quiz';
 import { FAQ } from '@widgets/FAQ/FAQ.tsx';
 import { Reviews } from '@widgets/Reviews/Reviews.tsx';
 import { Footer } from '@widgets/Footer';
-import ContactForm from '@features/ContactForm/ContactForm.tsx';
+import { ContactForm } from '@features/ContactForm/ContactForm';
 
 export const HomePage = () => {
   const { openModal, openSuccessModal } = useModal();
@@ -62,16 +62,9 @@ export const HomePage = () => {
 
       <main>
         <Hero onCtaPrimary={() => openModal('cost')} onCtaSecondary={() => openModal('engineer')} />
-
         <Brands />
-
-        <section id="services" className="reveal scroll-mt-28 bg-white py-8 sm:scroll-mt-32 sm:py-12 md:py-16 lg:py-24">
-          <Services onCtaClick={() => openModal('consultation')} />
-        </section>
-
-        <section id="advantages" className="reveal scroll-mt-28 bg-gray-50 py-8 sm:scroll-mt-32 sm:py-12 md:py-16 lg:py-24">
-          <Advantages />
-        </section>
+        <Services onCtaClick={() => openModal('consultation')} />
+        <Advantages />
 
         <section id="process" className="reveal scroll-mt-28 bg-white py-8 sm:scroll-mt-32 sm:py-12 md:py-16 lg:py-24">
           <Process />

@@ -1,4 +1,4 @@
-import { createContext, useContext, useCallback, useMemo, useState, ReactNode, FC } from 'react'
+import { createContext, useCallback, useMemo, useState, ReactNode, FC } from 'react'
 
 import SuccessModal from '@shared/ui/Modal/SuccessModal'
 import ContactForm from '@features/ContactForm/ContactForm'
@@ -17,7 +17,7 @@ interface SuccessModalState {
     autoCloseDelay: number
 }
 
-interface ModalContextType {
+export interface ModalContextType {
     // Основные модальные окна (консультация/вызов инженера/расчет)
     modal: ModalState
     openModal: (type: ModalState['type']) => void
@@ -29,12 +29,11 @@ interface ModalContextType {
     closeSuccessModal: () => void
 }
 
-const ModalContext = createContext<ModalContextType | null>(null)
+export const ModalContext = createContext<ModalContextType | null>(null)
 
 interface ModalProviderProps {
     children: ReactNode
 }
-
 /**
  * Провайдер для управления всеми модальными окнами в приложении
  * Инкапсулирует состояние и логику открытия/закрытия модалок
@@ -139,16 +138,4 @@ export const ModalProvider: FC<ModalProviderProps> = ({ children }) => {
             />
         </ModalContext.Provider>
     )
-}
-
-/**
- * Хук для использования ModalContext
- * Выбрасывает ошибку, если используется вне ModalProvider
- */
-export const useModal = (): ModalContextType => {
-    const context = useContext(ModalContext)
-    if (!context) {
-        throw new Error('useModal должен использоваться внутри ModalProvider')
-    }
-    return context
 }
