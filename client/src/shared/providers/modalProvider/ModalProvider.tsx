@@ -113,7 +113,7 @@ export const ModalProvider: FC<ModalProviderProps> = ({ children }) => {
                         <ContactForm
                             type={modal.type === 'cost' ? 'main' : 'modal'}
                             onSubmitSuccess={() => {
-                                // Для квиза (cost) открываем специальный SuccessModal с другими текстами
+                                closeModal()
                                 if (modal.type === 'cost') {
                                     openSuccessModal({
                                         title: 'Заявка на расчет отправлена!',
