@@ -1,6 +1,6 @@
 import { Quote, Star } from 'lucide-react';
 import React, { FC } from 'react';
-import { Review } from '@app/types';
+import { Review } from 'src/shared/types';
 
 interface IReviewsItemProps {
   review: Review

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { ICON_MAP } from '@shared/assets/icons.tsx';
 
-import { ServiceWithImage } from '@app/types';
+import { ServiceWithImage } from 'src/shared/types';
 
 interface IServicesItemProps {
   service: ServiceWithImage;

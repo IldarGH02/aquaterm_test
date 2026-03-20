@@ -1,4 +1,4 @@
-import { ServiceWithImage } from '@app/types'
+import { ServiceWithImage } from 'src/shared/types'
 
 export const SERVICES: ServiceWithImage[] = [
   {

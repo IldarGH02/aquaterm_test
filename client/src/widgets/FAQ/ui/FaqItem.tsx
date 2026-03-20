@@ -1,6 +1,6 @@
 import { ChevronDown } from 'lucide-react';
 import React, { FC } from 'react';
-import { FAQS } from '@app/types/faq.types.ts';
+import { FAQS } from '@shared/types/faq.types.ts';
 
 interface IFaqItemProps {
   faq: FAQS;

@@ -1,4 +1,4 @@
-import { CaseStudy } from '@app/types/case.types.ts'
+import { CaseStudy } from '@shared/types/case.types.ts'
 
 export const CASES: CaseStudy[] = [
   {

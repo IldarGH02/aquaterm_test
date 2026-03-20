@@ -1,4 +1,4 @@
-import { Advantages } from '@app/types/advantages.types.ts';
+import { Advantages } from '@shared/types/advantages.types.ts';
 import { ICON_MAP } from '@shared/constants';
 import { FC } from 'react';
 import { AdvantagesItem } from '@widgets/Advantages/ui/AdvantagesItem.tsx';

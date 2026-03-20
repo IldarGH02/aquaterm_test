@@ -1,7 +1,7 @@
 import { useCallback, useState, FC, ChangeEvent } from 'react'
 import { sanitizeInput, sanitizePhone } from '@shared/lib/sanitization/input.sanitizer.ts'
 import { contactFormValidators } from "@features/ContactForm/ui/validator.ts";
-import { useForm } from '@features/hooks/useForm.tsx'
+import { useForm } from '@shared/lib/hooks/useForm'
 import { Input, Select, Button } from '@shared/ui'
 
 interface ContactFormProps {

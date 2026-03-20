@@ -1,18 +1,23 @@
 import { FC } from 'react';
 import { BRANDS } from '@shared/constants';
-import { BrandsList } from '@widgets/Brands/ui/BrandsList.tsx';
+import { Brands } from '@shared/types/brands.types.ts'
+import { BrandsHiddenList, BrandsList } from '@widgets/Brands/ui/BrandsList.tsx'
 
-const BrandItem: FC<{ name: string }> = ({ name }) => (
+interface IBrandsProps {
+    brandName: Brands;
+}
+
+const BrandItem: FC<IBrandsProps> = ({ brandName }) => (
   <span
     className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-200 uppercase tracking-tighter hover:text-[#1a224f] transition-colors duration-300 cursor-default select-none flex-shrink-0"
     style={{ fontFamily: 'Montserrat, sans-serif' }}
     aria-hidden="true"
   >
-    {name}
+    {brandName.name}
   </span>
 );
 
-export const Brands: FC = () => {
+export const BrandsComponent = () => {
   return (
     <div className="w-full bg-white border-b border-gray-100 overflow-hidden py-6 sm:py-8 md:py-10">
       <div className="container mx-auto px-4 mb-4 sm:mb-6">
@@ -31,9 +36,7 @@ export const Brands: FC = () => {
           className="animate-marquee whitespace-nowrap flex items-center gap-8 sm:gap-12 md:gap-16 px-6 sm:px-8"
           aria-hidden="true"
         >
-          {[...BRANDS, ...BRANDS].map((brand, idx) => (
-            <BrandItem key={idx} name={brand.name} />
-          ))}
+          <BrandsHiddenList items={ BRANDS }/>
         </div>
       </div>
     </div>

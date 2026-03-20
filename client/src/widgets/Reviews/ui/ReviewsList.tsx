@@ -1,4 +1,4 @@
-import { Review } from '@app/types';
+import { Review } from 'src/shared/types';
 import { FC } from 'react';
 import { ReviewsItem } from '@widgets/Reviews/ui/ReviewsItem.tsx';
 

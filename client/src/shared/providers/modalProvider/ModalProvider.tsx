@@ -1,7 +1,7 @@
 import { createContext, useCallback, useMemo, useState, ReactNode, FC } from 'react'
 
 import SuccessModal from '@shared/ui/Modal/SuccessModal'
-import ContactForm from '@features/ContactForm/ContactForm'
+import { ContactForm } from '@features/ContactForm/ContactForm'
 
 import { Modal } from '@shared/ui'
 
@@ -10,7 +10,7 @@ interface ModalState {
     type: 'consultation' | 'engineer' | 'cost' | null
 }
 
-interface SuccessModalState {
+export interface SuccessModalState {
     isOpen: boolean
     title: string
     message: string

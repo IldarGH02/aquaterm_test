@@ -94,7 +94,7 @@ vanotest/
 │   └── ModalContext.tsx        # Global modal state: openModal(), openSuccessModal()
 │
 ├── hooks/
-│   └── useForm.tsx              # Generic form hook: state, validation, sanitization, submit
+│   └── useForm.ts              # Generic form hook: state, validation, sanitization, submit
 │
 ├── lib/
 │   ├── index.ts                # Barrel: re-exports validation + sanitization
@@ -140,7 +140,7 @@ vanotest/
 - `constants.tsx` and `types.ts` at the root are barrel re-exports; do not add logic there.
 
 ### Form handling
-- Use `useForm` from `hooks/useForm.tsx` for any new form. Supply `initialValues`, `validators`, and an `onSubmit` handler.
+- Use `useForm` from `hooks/useForm.ts` for any new form. Supply `initialValues`, `validators`, and an `onSubmit` handler.
 - Validators are composed with `compose()` from `lib/validation/form.validator.ts`.
 - Phone validation uses `PhoneValidator.validate()` (Russian format).
 - Input sanitization happens via `sanitizeInput()` and `sanitizePhone()` from `lib/sanitization/input.sanitizer.ts`.

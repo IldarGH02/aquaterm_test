@@ -38,20 +38,19 @@ export default defineConfig({
         },
           preprocessorOptions: {
               scss: {
-                  // Опции для sass-компилятора
-                  quietDeps: true, // игнорировать предупреждения из зависимостей
+                  quietDeps: true,
               },
           }
     },
     server: {
         port: 3000,
         host: '0.0.0.0',
-        open: true,
         proxy: {
             '/api': {
-                target: 'http://localhost:5432',
+                target: 'http://localhost:8787',
                 changeOrigin: true,
             },
         },
+
     },
 });

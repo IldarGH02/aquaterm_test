@@ -15,7 +15,7 @@ import {
 import { Button, Input, Modal, Select } from '@shared/ui';
 import { crmApi } from '@shared/api/crm-api/crmApi.ts';
 import type { CreateTaskInput } from '@shared/api/crm-api/crmApi.ts';
-import { useCrmAuth } from '@features/hooks/crm/useCrmAuth';
+import { useCrmAuth } from '@shared/lib/hooks/crm/useCrmAuth';
 import {
   TASK_PRIORITY_OPTIONS,
   TASK_STATUS_OPTIONS,

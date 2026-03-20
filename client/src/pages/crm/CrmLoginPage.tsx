@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button, Input } from '@shared/ui';
 import { ApiError } from '@shared/api/crm-api/http.ts';
-import { useCrmAuth } from '@features/hooks/crm/useCrmAuth';
+import { useCrmAuth } from '@shared/lib/hooks/crm/useCrmAuth';
 
 export const CrmLoginPage: React.FC = () => {
   const navigate = useNavigate();

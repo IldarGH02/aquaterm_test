@@ -1,4 +1,4 @@
-import { FAQS } from "@app/types/faq.types.ts"
+import { FAQS } from "@shared/types/faq.types.ts"
 import { FC } from 'react';
 import { FaqItem } from '@widgets/FAQ/ui/FaqItem.tsx';
 

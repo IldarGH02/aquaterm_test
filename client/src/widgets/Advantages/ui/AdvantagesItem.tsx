@@ -1,4 +1,4 @@
-import { Advantages } from '@app/types/advantages.types.ts';
+import { Advantages } from '@shared/types/advantages.types.ts';
 import { ComponentType, FC } from 'react';
 
 interface IAdvantagesItemProps {

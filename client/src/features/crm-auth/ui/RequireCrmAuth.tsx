@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useCrmAuth } from '@features/hooks/crm/useCrmAuth';
+import { useCrmAuth } from '@shared/lib/hooks/crm/useCrmAuth';
 
 export const RequireCrmAuth: FC<{ children: ReactNode }> = ({ children }) => {
   const { user, isLoading } = useCrmAuth();

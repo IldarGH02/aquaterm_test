@@ -3,7 +3,7 @@ import path from 'node:path';
 import type Database from 'better-sqlite3';
 
 export function runMigrations(db: Database.Database): void {
-  const migrationsDir = path.resolve(process.cwd(), 'server', 'migrations');
+  const migrationsDir = path.resolve(process.cwd(), 'migrations');
 
   db.exec(`
     CREATE TABLE IF NOT EXISTS schema_migrations (

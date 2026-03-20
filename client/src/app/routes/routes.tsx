@@ -1,5 +1,5 @@
 import { Navigate, Route } from "react-router-dom";
-import { HomePage } from "@pages/HomePage.tsx";
+import { HomePage } from "@pages/HomePage/HomePage.tsx";
 import CrmLoginPage from "@pages/crm/CrmLoginPage.tsx";
 import RequireCrmAuth from "@features/crm-auth/ui/RequireCrmAuth.tsx";
 import CrmShell from "@pages/crm/CrmShell.tsx";

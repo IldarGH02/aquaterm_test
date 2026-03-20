@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState, FC } from 'react';
 import { Bell, ChartColumnStacked, LogOut, SquareKanban, UserCog2, X } from 'lucide-react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { crmApi } from '@shared/api/crm-api/crmApi.ts';
-import { useCrmAuth } from '@features/hooks/crm/useCrmAuth';
+import { useCrmAuth } from '@shared/lib/hooks/crm/useCrmAuth';
 import type { CrmNotification } from '@features/crm-auth/types';
 
 function formatDateTime(value: string): string {

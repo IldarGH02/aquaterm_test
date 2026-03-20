@@ -1,4 +1,4 @@
-import { CaseStudy } from '@app/types';
+import { CaseStudy } from 'src/shared/types';
 import { FC } from 'react';
 import { CasesItem } from '@widgets/Cases/ui/CasesItem.tsx';
 

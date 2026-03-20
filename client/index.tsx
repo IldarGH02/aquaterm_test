@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import App from './src/app/App';
 import { ModalProvider } from './src/shared/providers/modalProvider';
-import { CrmAuthProvider } from './src/entities/crm/CrmAuthContext';
+import { CrmAuthProvider } from './src/app/crm/CrmAuthContext';
 import './index.css';
 
 const rootElement = document.getElementById('root');

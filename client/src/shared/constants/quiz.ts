@@ -1,4 +1,4 @@
-import { QuizStep } from '@/src/app/types/quiz.types.ts'
+import { QuizStep } from '@shared/types/quiz.types.ts'
 
 export const QUIZ_STEPS: QuizStep[] = [
   { id: 1, question: 'Что именно вас интересует?', options: ['Отопление под ключ', 'Система водоочистки', 'Водоснабжение', 'Ремонт/ТО котла', 'Запчасти'] },

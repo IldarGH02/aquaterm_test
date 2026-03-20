@@ -1,4 +1,4 @@
-import { ServiceWithImage } from '@app/types';
+import { ServiceWithImage } from 'src/shared/types';
 import { FC } from 'react';
 import { ServicesItem } from '@widgets/Services/ui/ServicesItem.tsx';
 

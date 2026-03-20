@@ -1,9 +1,40 @@
 {
-  "semi": true,
+  "printWidth": 100,
+  "tabWidth": 4,
+  "useTabs": false,
   "singleQuote": true,
-  "tabWidth": 2,
-  "trailingComma": "es5",
-  "bracketSpacing": true,
-  "jsxBracketSameLine": false,
-  "arrowParens": "always"
+  "jsxSingleQuote": true,
+  "semi": false,
+  "trailingComma": "none",
+  "arrowParens": "always",
+  "quoteProps": "consistent",
+  "endOfLine": "auto",
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "/app/",
+    "/pages/",
+    "/widgets/",
+    "/features/",
+    "/entities/",
+    "/shared/",
+    "^../(.*)",
+    "^./(.*)",
+    "^./(.scss)"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "overrides": [
+    {
+      "files": "*.{json,yml,md,scss,sass,css}",
+      "options": {
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": "*.{ts,tsx}",
+      "options": {
+        "parser": "typescript"
+      }
+    }
+  ]
 }
