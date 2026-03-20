@@ -594,6 +594,11 @@ export const CrmTasksPage: React.FC = () => {
                       <span className={`rounded-full border px-2 py-1 text-xs font-semibold ${priorityClasses(task.priority)}`}>
                         {getPriorityLabel(task.priority)}
                       </span>
+                      {task.leadId !== null && (
+                        <span className="rounded-full border border-violet-200 bg-violet-50 px-2 py-1 text-xs font-semibold text-violet-700">
+                          Лид #{task.leadId}
+                        </span>
+                      )}
                     </div>
 
                     <div className="mt-3 space-y-1 text-xs text-slate-500">

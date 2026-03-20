@@ -1,9 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import type Database from 'better-sqlite3';
 
 export function runMigrations(db: Database.Database): void {
-  const migrationsDir = path.resolve(process.cwd(), 'migrations');
+  const migrationsDir = path.resolve(fileURLToPath(new URL('.', import.meta.url)), '..', 'migrations');
 
   db.exec(`
     CREATE TABLE IF NOT EXISTS schema_migrations (

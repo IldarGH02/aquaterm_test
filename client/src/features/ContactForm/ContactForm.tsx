@@ -31,15 +31,14 @@ export const ContactForm: FC<ContactFormProps> = ({ type, onSubmitSuccess }) => 
     validators,
     autoSanitize: false,
     sanitizableFields: ['name', 'phone'],
-    onSubmit: async (values, sanitizedValues) => {
-      const dataToSubmit = sanitizedValues || {
+    onSubmit: async (values) => {
+      const dataToSubmit = {
         name: values.name.trim(),
         phone: values.phone.trim(),
         service: type === 'main' ? values.service : 'inquiry',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       }
 
-      // Отправка на backend (если endpoint доступен)
       try {
         await fetch('/api/contact-form', {
           method: 'POST',
