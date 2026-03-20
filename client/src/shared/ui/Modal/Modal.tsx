@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { X } from 'lucide-react';
 import { cn } from '@shared/lib/utils/cn.ts'
 
@@ -62,6 +62,10 @@ export const Modal: React.FC<ModalProps> = ({
   ariaLabel = 'Диалоговое окно'
 }) => {
   const dialogRef = useRef<HTMLDivElement>(null)
+  const onCloseRef = useRef(onClose)
+  useEffect(() => { onCloseRef.current = onClose })
+
+  const stableClose = useCallback(() => onCloseRef.current(), [])
 
   // Блокировка скролла + focus trap при открытом модальном окне
   useEffect(() => {
@@ -95,7 +99,7 @@ export const Modal: React.FC<ModalProps> = ({
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && closeOnEscape) {
-        onClose()
+        onCloseRef.current()
         return
       }
 
@@ -127,13 +131,13 @@ export const Modal: React.FC<ModalProps> = ({
       document.removeEventListener('keydown', handleKeyDown)
       previouslyFocused?.focus()
     }
-  }, [isOpen, closeOnEscape, onClose])
+  }, [isOpen, closeOnEscape])
 
   if (!isOpen) return null
 
   const handleOverlayClick = (e: React.MouseEvent) => {
     if (closeOnOverlayClick && e.target === e.currentTarget) {
-      onClose()
+      stableClose()
     }
   }
 
@@ -168,7 +172,7 @@ export const Modal: React.FC<ModalProps> = ({
         {/* Кнопка закрытия */}
         {showCloseButton && (
           <button
-            onClick={onClose}
+            onClick={stableClose}
             className="absolute top-4 sm:top-6 right-4 sm:right-6 text-gray-400 hover:text-[#d71e1e] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center z-20"
             aria-label={closeButtonLabel}
           >
@@ -177,7 +181,7 @@ export const Modal: React.FC<ModalProps> = ({
         )}
 
         {/* Содержимое */}
-        <div className="p-6 sm:p-8 md:p-10">
+        <div className="p-5 sm:p-6 md:p-8">
           {children}
         </div>
       </div>
