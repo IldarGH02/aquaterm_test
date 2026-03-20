@@ -60,18 +60,18 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
   const selectId = id || `select-${Math.random().toString(36).substr(2, 9)}`
 
   // Базовые стили
-  const baseStyles = 'rounded-lg border transition-colors outline-none focus:ring-2 focus:ring-offset-0 bg-white'
+  const baseStyles = 'rounded-xl border font-["Inter"] transition-all duration-300 outline-none focus:ring-2 focus:ring-offset-0 bg-white shadow-sm hover:border-slate-300'
 
   // Стили для состояний
   const stateStyles = error
     ? 'border-red-500 focus:border-red-600 focus:ring-red-200'
-    : 'border-gray-200 focus:border-[#1a224f] focus:ring-[#1a224f]/20'
+    : 'border-slate-200 focus:border-[#1a224f] focus:ring-[#1a224f]/20'
 
   // Стили для размеров
   const sizeStyles = {
-    sm: 'px-3 py-2 text-sm',
-    md: 'px-4 py-3 text-base',
-    lg: 'px-6 py-4 text-lg'
+    sm: 'px-3 py-1.5 text-sm',
+    md: 'px-3.5 py-2 text-sm',
+    lg: 'px-4 py-2.5 text-base'
   }
 
   const classes = cn(
@@ -86,7 +86,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
   return (
     <div className={fullWidth ? 'w-full' : ''}>
       {label && (
-        <label htmlFor={selectId} className="block text-sm font-semibold mb-1 text-gray-700">
+        <label htmlFor={selectId} className="block text-sm font-semibold mb-1.5 font-['Inter'] text-slate-700">
           {label}
           {(required || showRequired) && <span className="text-red-500 ml-1">*</span>}
         </label>

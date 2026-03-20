@@ -21,21 +21,21 @@ interface MetricCardProps {
 }
 
 const toneClassMap: Record<MetricCardProps['tone'], string> = {
-  neutral: 'border-slate-200 bg-slate-50 text-slate-800',
-  blue: 'border-blue-200 bg-blue-50 text-blue-800',
-  amber: 'border-amber-200 bg-amber-50 text-amber-800',
-  red: 'border-red-200 bg-red-50 text-red-800',
-  green: 'border-emerald-200 bg-emerald-50 text-emerald-800',
+  neutral: 'border-slate-200/60 bg-gradient-to-br from-white to-slate-50/50 text-slate-800',
+  blue: 'border-blue-100 bg-gradient-to-br from-white to-blue-50/30 text-blue-800',
+  amber: 'border-amber-100 bg-gradient-to-br from-white to-amber-50/30 text-amber-800',
+  red: 'border-red-100 bg-gradient-to-br from-white to-red-50/30 text-red-800',
+  green: 'border-emerald-100 bg-gradient-to-br from-white to-emerald-50/30 text-emerald-800',
 };
 
 const MetricCard: React.FC<MetricCardProps> = ({ title, value, tone, icon }) => {
   return (
-    <div className={`rounded-2xl border px-4 py-3 ${toneClassMap[tone]}`}>
-      <div className="inline-flex items-center gap-2 text-xs uppercase tracking-wide opacity-90">
+    <div className={`group rounded-2xl border px-5 py-4 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 ${toneClassMap[tone]}`}>
+      <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider opacity-90">
         {icon}
         {title}
       </div>
-      <div className="mt-2 text-2xl font-black">{value}</div>
+      <div className="mt-3 text-3xl font-['Outfit'] font-bold">{value}</div>
     </div>
   );
 };
@@ -87,12 +87,12 @@ export const CrmDashboardPage: React.FC = () => {
   }, [completion]);
 
   return (
-    <div className="space-y-4">
-      <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+    <div className="space-y-6">
+      <section className="rounded-2xl border border-slate-200/60 bg-white/80 backdrop-blur-xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h1 className="text-lg font-black uppercase tracking-wide text-[#1a224f]">Дашборд руководителя</h1>
-            <p className="text-sm text-slate-500">Висящие задачи, просрочки, скорость команды и загрузка по ролям.</p>
+            <h1 className="text-2xl font-['Outfit'] font-bold tracking-tight text-[#1a224f]">Дашборд руководителя</h1>
+            <p className="mt-1 text-sm font-medium text-slate-500">Висящие задачи, просрочки, скорость команды и загрузка по ролям.</p>
           </div>
 
           <Button variant="secondary" leftIcon={<RefreshCcw className="h-4 w-4" />} onClick={() => void loadDashboard()}>
@@ -112,9 +112,9 @@ export const CrmDashboardPage: React.FC = () => {
         <MetricCard title="Сделано всего" value={overview.doneTotal} tone="neutral" icon={<SquareCheck className="h-4 w-4" />} />
       </section>
 
-      <section className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_340px]">
-        <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-700">Нагрузка по сотрудникам</h2>
+      <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
+        <div className="rounded-3xl border border-slate-200/60 bg-white/80 backdrop-blur-xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+          <h2 className="mb-4 text-sm font-bold uppercase tracking-wider text-[#1a224f]">Нагрузка по сотрудникам</h2>
 
           {isLoading ? (
             <div className="flex items-center gap-2 text-sm text-slate-500">
@@ -124,7 +124,7 @@ export const CrmDashboardPage: React.FC = () => {
           ) : (
             <div className="overflow-x-auto">
               <table className="min-w-full text-sm">
-                <thead className="text-left text-xs uppercase tracking-wide text-slate-500">
+                <thead className="text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
                   <tr>
                     <th className="pb-2">Сотрудник</th>
                     <th className="pb-2">Роль</th>
@@ -157,15 +157,15 @@ export const CrmDashboardPage: React.FC = () => {
           )}
         </div>
 
-        <div className="space-y-4">
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-700">Скорость выполнения</h2>
-            <div className="space-y-2">
+        <div className="space-y-6">
+          <div className="rounded-3xl border border-slate-200/60 bg-white/80 backdrop-blur-xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+            <h2 className="mb-4 text-sm font-bold uppercase tracking-wider text-[#1a224f]">Скорость выполнения</h2>
+            <div className="space-y-3">
               {completion.map((item) => (
-                <div key={item.userId} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                  <div className="text-sm font-semibold text-slate-800">{item.login}</div>
-                  <div className="mt-1 text-xs text-slate-500">Выполнено: {item.completedTasks}</div>
-                  <div className="text-xs text-slate-500">Среднее время: {item.avgMinutes ?? '—'} мин</div>
+                <div key={item.userId} className="rounded-2xl border border-slate-100 bg-gradient-to-br from-white to-slate-50 p-4 transition-all hover:shadow-sm">
+                  <div className="text-[15px] font-bold text-slate-800">{item.login}</div>
+                  <div className="mt-2 text-xs font-medium text-slate-500 flex items-center gap-1.5"><SquareCheck className="h-3.5 w-3.5 text-emerald-500"/> Выполнено: {item.completedTasks}</div>
+                  <div className="mt-1 text-xs font-medium text-slate-500 flex items-center gap-1.5"><Timer className="h-3.5 w-3.5 text-blue-500"/> Среднее время: {item.avgMinutes ?? '—'} мин</div>
                 </div>
               ))}
 
@@ -173,14 +173,17 @@ export const CrmDashboardPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-            <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-700">Лучший результат</h2>
+          <div className="rounded-3xl border border-slate-200/60 bg-white/80 backdrop-blur-xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-6 opacity-5 pointer-events-none">
+              <Activity className="h-24 w-24 text-[#1a224f]" />
+            </div>
+            <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-[#1a224f] relative z-10">Лучший результат</h2>
             {topPerformer ? (
-              <>
-                <div className="text-lg font-black text-[#1a224f]">{topPerformer.login}</div>
-                <div className="mt-1 text-sm text-slate-600">Закрыто задач: {topPerformer.completedTasks}</div>
-                <div className="text-sm text-slate-600">Среднее время: {topPerformer.avgMinutes ?? '—'} мин</div>
-              </>
+              <div className="relative z-10 text-[#1a224f]">
+                <div className="text-2xl font-['Outfit'] font-extrabold">{topPerformer.login}</div>
+                <div className="mt-2 text-sm font-medium opacity-80">Закрыто задач: {topPerformer.completedTasks}</div>
+                <div className="mt-1 text-sm font-medium opacity-80">Среднее время: {topPerformer.avgMinutes ?? '—'} мин</div>
+              </div>
             ) : (
               <div className="text-sm text-slate-500">Недостаточно данных для расчета.</div>
             )}

@@ -15,8 +15,8 @@ function formatDateTime(value: string): string {
 
 function navClass(isActive: boolean): string {
   return isActive
-    ? 'flex items-center gap-2 rounded-xl bg-[#1a224f] px-3 py-2 text-sm font-semibold text-white'
-    : 'flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900';
+    ? 'flex items-center gap-3 rounded-xl bg-gradient-to-r from-[#1a224f] to-[#3a4585] px-3.5 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#1a224f]/20 transition-all duration-300'
+    : 'flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-500 hover:bg-white hover:text-slate-900 hover:shadow-sm transition-all duration-300';
 }
 
 export const CrmShell: FC = () => {
@@ -77,9 +77,9 @@ export const CrmShell: FC = () => {
   }, [user]);
 
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-900">
-      <div className="mx-auto grid min-h-screen max-w-[1600px] grid-cols-1 lg:grid-cols-[260px_minmax(0,1fr)]">
-        <aside className="hidden border-r border-slate-200 bg-white p-4 lg:flex lg:flex-col lg:justify-between">
+    <div className="min-h-screen bg-[#f8fafc] text-slate-900 font-['Inter'] selection:bg-[#1a224f]/10 selection:text-[#1a224f]">
+      <div className="mx-auto grid min-h-screen max-w-[1600px] grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)]">
+        <aside className="hidden border-r border-slate-200/60 bg-white/80 backdrop-blur-xl p-5 lg:flex lg:flex-col lg:justify-between shadow-[4px_0_24px_rgba(0,0,0,0.02)] z-10">
           <div>
             <nav className="space-y-1">
               {navItems.map((item) => {
@@ -107,18 +107,18 @@ export const CrmShell: FC = () => {
         </aside>
 
         <div className="flex min-w-0 flex-col">
-          <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/95 px-4 py-3 backdrop-blur lg:px-6">
+          <header className="sticky top-0 z-30 border-b border-slate-200/60 bg-white/80 px-4 py-3 backdrop-blur-xl lg:px-8 shadow-sm">
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0">
-                <div className="truncate text-sm font-semibold uppercase tracking-wide text-[#1a224f]">АКВАТЕРМ CRM</div>
-                <div className="truncate text-xs text-slate-500">{user?.login} · {user?.role}</div>
+                <div className="truncate text-[15px] font-['Outfit'] font-bold uppercase tracking-widest text-[#1a224f]">АКВАТЕРМ CRM</div>
+                <div className="truncate text-xs font-medium text-slate-500 mt-0.5">{user?.login} <span className="text-slate-300 px-1">•</span> {user?.role}</div>
               </div>
 
               <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={() => setIsNotificationsOpen(true)}
-                  className="relative inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-100"
+                  className="relative inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200/60 bg-white text-slate-600 shadow-sm transition-all duration-300 hover:border-slate-300 hover:text-[#1a224f] hover:shadow-md"
                   aria-label="Уведомления"
                 >
                   <Bell className="h-4 w-4" />
@@ -160,16 +160,16 @@ export const CrmShell: FC = () => {
             </div>
           </header>
 
-          <main className="flex-1 p-4 lg:p-6">
+          <main className="flex-1 p-4 lg:p-8">
             <Outlet />
           </main>
         </div>
       </div>
 
       {isNotificationsOpen && (
-        <div className="fixed inset-0 z-50 bg-black/35 p-3 sm:p-6" onClick={() => setIsNotificationsOpen(false)}>
+        <div className="fixed inset-0 z-50 bg-slate-900/20 backdrop-blur-sm transition-all duration-300 flex justify-end" onClick={() => setIsNotificationsOpen(false)}>
           <div
-            className="ml-auto flex h-full w-full max-w-md flex-col rounded-2xl border border-slate-200 bg-white shadow-xl"
+            className="flex h-full w-full max-w-md flex-col bg-white shadow-[[-20px_0_40px_rgba(0,0,0,0.05)]] transition-transform duration-300"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="flex items-center justify-between border-b border-slate-200 px-4 py-3">

@@ -48,23 +48,23 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   // Базовые стили
-  const baseStyles = 'inline-flex items-center justify-center font-bold rounded transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px] focus:outline-none focus:ring-2 focus:ring-offset-2'
+  const baseStyles = 'inline-flex items-center justify-center font-[Outfit] tracking-wide font-semibold rounded-lg transition-all duration-300 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed min-h-[36px] focus:outline-none focus:ring-2 focus:ring-offset-2 outline-none'
 
   // Варианты (colors)
   const variants = {
-    primary: 'bg-[#1a224f] text-white hover:bg-[#2a3575] focus:ring-[#1a224f]',
-    secondary: 'bg-white text-[#1a224f] border-2 border-[#1a224f] hover:bg-[#1a224f] hover:text-white focus:ring-[#1a224f]',
-    danger: 'bg-[#d71e1e] text-white hover:bg-[#b01818] focus:ring-[#d71e1e]',
-    ghost: 'bg-transparent text-[#1a224f] hover:bg-gray-100 focus:ring-gray-400',
-    success: 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-600'
+    primary: 'bg-gradient-to-tr from-[#1a224f] to-[#3a4585] text-white shadow-md shadow-[#1a224f]/20 hover:shadow-lg hover:shadow-[#1a224f]/30 hover:-translate-y-0.5 focus:ring-[#1a224f]',
+    secondary: 'bg-white text-[#1a224f] border border-slate-200 shadow-sm hover:border-slate-300 hover:bg-slate-50 focus:ring-slate-200',
+    danger: 'bg-gradient-to-tr from-red-600 to-red-500 text-white shadow-md shadow-red-500/20 hover:shadow-lg hover:-translate-y-0.5 focus:ring-red-500',
+    ghost: 'bg-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:ring-slate-200',
+    success: 'bg-gradient-to-tr from-emerald-600 to-emerald-500 text-white shadow-md shadow-emerald-500/20 hover:shadow-lg hover:-translate-y-0.5 focus:ring-emerald-500'
   }
 
   // Размеры
   const sizes = {
-    sm: 'px-3 py-2 text-sm',
-    md: 'px-6 py-4 text-base',
-    lg: 'px-10 py-5 text-lg',
-    xl: 'px-12 py-6 text-xl'
+    sm: 'px-3 py-1.5 text-sm',
+    md: 'px-4 py-2 text-sm',
+    lg: 'px-5 py-2.5 text-base',
+    xl: 'px-6 py-3 text-base'
   }
 
   const classes = cn(
