@@ -19,7 +19,7 @@ function navClass(isActive: boolean): string {
     : 'flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-500 hover:bg-white hover:text-slate-900 hover:shadow-sm transition-all duration-300';
 }
 
-export const CrmShell: FC = () => {
+export const CrmShell = () => {
   const { user, logout } = useCrmAuth();
   const [notifications, setNotifications] = useState<CrmNotification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);

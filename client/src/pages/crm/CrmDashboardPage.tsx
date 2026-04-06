@@ -40,7 +40,7 @@ const MetricCard: React.FC<MetricCardProps> = ({ title, value, tone, icon }) => 
   );
 };
 
-export const CrmDashboardPage: React.FC = () => {
+export const CrmDashboardPage = () => {
   const [overview, setOverview] = useState<DashboardOverview>(emptyOverview);
   const [workload, setWorkload] = useState<DashboardWorkloadItem[]>([]);
   const [completion, setCompletion] = useState<DashboardCompletionItem[]>([]);

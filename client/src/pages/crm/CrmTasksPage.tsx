@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { Button, Input, Modal, Select } from '@shared/ui';
 import { crmApi } from '@shared/api/crm-api/crmApi.ts';
-import type { CreateTaskInput } from '@shared/api/crm-api/crmApi.ts';
+import type { CreateTaskInput } from '@shared/api/types/index.ts';
 import { useCrmAuth } from '@shared/lib/hooks/crm/useCrmAuth';
 import {
   TASK_PRIORITY_OPTIONS,
@@ -152,7 +152,7 @@ function eventLabel(eventType: string): string {
   }
 }
 
-export const CrmTasksPage: React.FC = () => {
+export const CrmTasksPage = () => {
   const { user } = useCrmAuth();
   const [tasks, setTasks] = useState<CrmTask[]>([]);
   const [users, setUsers] = useState<CrmUser[]>([]);

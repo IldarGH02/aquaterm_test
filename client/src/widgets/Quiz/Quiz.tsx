@@ -50,10 +50,10 @@ export const Quiz: FC<{ onSubmitSuccess?:() => void}> = ( { onSubmitSuccess }) =
                     <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-400 opacity-10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
 
                     <div className="relative z-10">
-                        <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-8 border border-white/10">
-                            <Calculator size={14} className="text-[#d71e1e]" />
-                            <span>Онлайн-расчет</span>
-                        </div>
+                        {/*<div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-8 border border-white/10">*/}
+                        {/*    <Calculator size={14} className="text-[#d71e1e]" />*/}
+                        {/*    <span>Онлайн-расчет</span>*/}
+                        {/*</div>*/}
 
                         <h2 className="text-3xl md:text-4xl font-black mb-6 leading-tight">
                             РАССЧИТАЙТЕ СТОИМОСТЬ <br />

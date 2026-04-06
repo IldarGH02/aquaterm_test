@@ -59,10 +59,16 @@ export const Hero: FC<HeroProps> = ({ onCtaPrimary, onCtaSecondary }) => {
             </div>
 
             {/* Бейджи доверия */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 text-xs font-bold text-blue-200 pb-6 lg:pb-8">
-              <div className="flex items-center gap-2"><Shield size={14} className="text-green-400" /> АВТОРИЗОВАННЫЙ СЕРВИС BAXI</div>
-              <div className="flex items-center gap-2"><Wrench size={14} className="text-green-400" /> ОПЫТ РАБОТЫ 15 ЛЕТ</div>
-            </div>
+            {/*<div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 text-xs font-bold text-blue-200 pb-6 lg:pb-8">*/}
+            {/*  <div className="flex items-center gap-2">*/}
+            {/*    <Shield size={14} className="text-green-400" />*/}
+            {/*    АВТОРИЗОВАННЫЙ СЕРВИС BAXI*/}
+            {/*  </div>*/}
+            {/*  <div className="flex items-center gap-2">*/}
+            {/*    <Wrench size={14} className="text-green-400" />*/}
+            {/*    ОПЫТ РАБОТЫ 15 ЛЕТ*/}
+            {/*  </div>*/}
+            {/*</div>*/}
           </div>
 
           {/* ── Правая часть: фото ── */}
@@ -80,6 +86,18 @@ export const Hero: FC<HeroProps> = ({ onCtaPrimary, onCtaSecondary }) => {
                   e.currentTarget.src = 'https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&q=80&w=1200';
                 }}
               />
+              <div className="absolute top-4 left-4 lg:top-5 lg:left-5 bg-[#1a224f]/90 backdrop-blur-md p-4 lg:p-5 rounded-2xl border-l-4 border-[#d71e1e] shadow-2xl max-w-[200px]">
+                <div className="text-1xl lg:text-1xl font-black text-white mb-0.5">
+                  АВТОРИЗОВАННЫЙ СЕРВИС BAXI
+                </div>
+              </div>
+
+              <div className="absolute top-4 right-4 lg:top-5 lg:right-5 bg-[#1a224f]/90 backdrop-blur-md p-4 lg:p-5 rounded-2xl border-l-4 border-[#d71e1e] shadow-2xl max-w-[200px]">
+                <div className="text-1xl lg:text-1xl font-black text-white mb-0.5">
+                  ОПЫТ РАБОТЫ 15 ЛЕТ
+                </div>
+              </div>
+
               <div className="absolute bottom-4 right-4 lg:bottom-5 lg:right-5 bg-[#1a224f]/90 backdrop-blur-md p-4 lg:p-5 rounded-2xl border-l-4 border-[#d71e1e] shadow-2xl max-w-[200px]">
                 <div className="text-2xl lg:text-3xl font-black text-white mb-0.5">5000+</div>
                 <div className="text-[10px] lg:text-xs text-blue-200 font-bold uppercase tracking-widest leading-none mb-1">довольных клиентов</div>

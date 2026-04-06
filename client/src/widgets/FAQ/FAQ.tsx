@@ -16,10 +16,10 @@ export const FAQ = () => {
             <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 md:gap-12 items-start">
                 {/* Header Section */}
                 <div className="lg:col-span-5 lg:sticky lg:top-24">
-                    <div className="inline-flex items-center space-x-2 text-[#d71e1e] font-black text-xs sm:text-sm uppercase tracking-[0.3em] mb-3 sm:mb-4">
-                        <HelpCircle size={14} />
-                        <span>Вопросы и ответы</span>
-                    </div>
+                    {/*<div className="inline-flex items-center space-x-2 text-[#d71e1e] font-black text-xs sm:text-sm uppercase tracking-[0.3em] mb-3 sm:mb-4">*/}
+                    {/*    <HelpCircle size={14} />*/}
+                    {/*    <span>Вопросы и ответы</span>*/}
+                    {/*</div>*/}
                     <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-[#1a224f] mb-4 sm:mb-6 md:mb-8 uppercase tracking-tight">
                         ОСТАЛИСЬ <br /> <span className="text-[#d71e1e]">ВОПРОСЫ?</span>
                     </h2>

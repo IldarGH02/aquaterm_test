@@ -14,7 +14,7 @@ export const FaqItem: FC<IFaqItemProps> = ({faq, index, openIndex, toggleFAQ}) =
     <div
       key={index}
       className={`border-2 rounded-2xl transition-all duration-300 overflow-hidden ${
-        openIndex === index ? 'border-[#1a224f] bg-white shadow-lg' : 'border-gray-100 bg-white hover:border-blue-100'
+        openIndex === index ? 'border-[#1a224f] bg-white shadow-lg' : 'border-gray-100 bg-white hover:border-red-600'
       }`}
     >
       <button

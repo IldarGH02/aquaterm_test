@@ -9,7 +9,7 @@ export const Footer = () => {
     return (
         <footer className="bg-[#1a224f] text-white pt-12 sm:pt-16 md:pt-20 pb-6 sm:pb-8 md:pb-10 relative overflow-hidden">
             {/* Visual accent from the brand style */}
-            <div className="absolute bottom-0 left-0 w-full h-1 sm:h-2 bg-[#d71e1e]"></div>
+            <div className="absolute bottom-0 left-0 w-full h-1 sm:h-2"></div>
 
             <div className="container mx-auto px-4 relative z-10">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-12 mb-10 sm:mb-14 md:mb-20">
