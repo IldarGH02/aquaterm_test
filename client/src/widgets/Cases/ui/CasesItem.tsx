@@ -6,7 +6,7 @@ interface ICaseItem {
   item: CaseStudy
 }
 
-export const CasesItem: FC<ICaseItem> = ({item}) => {
+export const CasesItem: FC<ICaseItem> = ({ item }) => {
   return (
     <div key={item.id} className="bg-white rounded-2xl shadow-lg overflow-hidden group border border-gray-100 flex flex-col h-full hover:shadow-2xl transition-all duration-500">
       <div className="relative h-40 sm:h-48 md:h-64 overflow-hidden bg-gray-100">
@@ -25,21 +25,23 @@ export const CasesItem: FC<ICaseItem> = ({item}) => {
       </div>
 
       <div className="p-4 sm:p-5 md:p-6 flex flex-col flex-grow">
-        <h3 className="text-sm sm:text-base md:text-xl font-bold mb-3 sm:mb-4 text-[#1a224f] leading-snug group-hover:text-[#d71e1e] transition-colors">{item.title}</h3>
+        <h3 className="text-sm sm:text-base md:text-xl font-bold mb-3 sm:mb-4 text-[#1a224f] leading-snug group-hover:text-[#d71e1e] transition-colors">
+          { item.title }
+        </h3>
 
         <div className="flex justify-between items-center mb-4 sm:mb-6 pt-3 sm:pt-4 border-t border-gray-50 gap-2">
-          <div className="flex items-center space-x-1 sm:space-x-2 text-[#d71e1e] text-xs sm:text-sm">
-            <Tag size={14} />
-            <span className="font-black text-xs sm:text-sm">{item.price}</span>
-          </div>
           <div className="flex items-center space-x-1 sm:space-x-2 text-gray-400 text-xs">
             <Clock size={14} />
-            <span className="text-xs sm:text-sm font-bold uppercase">{item.duration}</span>
+            <span className="text-xs sm:text-sm font-bold uppercase">
+              { item.duration }
+            </span>
           </div>
         </div>
 
         <div className="space-y-2 mb-4 sm:mb-6 text-xs sm:text-sm flex-grow">
-          <p className="text-gray-600 line-clamp-3 italic">"{item.problem}"</p>
+          <p className="text-gray-600 line-clamp-3 italic">
+            "{ item.problem }"
+          </p>
           <div className="p-2 sm:p-3 bg-gray-50 rounded-lg">
             <span className="font-bold text-[#1a224f] text-xs uppercase block mb-1">Что сделано:</span>
             <p className="text-gray-500 text-xs sm:text-sm leading-tight">{item.solution}</p>

@@ -12,181 +12,50 @@ import {
   SendHorizontal,
   UserRound,
 } from 'lucide-react';
-import { Button, Input, Modal, Select } from '@shared/ui';
+import { Button, Input, Select } from '@shared/ui';
 import { crmApi } from '@shared/api/crm-api/crmApi.ts';
-import type { CreateTaskInput } from '@shared/api/types/index.ts';
 import { useCrmAuth } from '@shared/lib/hooks/crm/useCrmAuth';
 import {
   TASK_PRIORITY_OPTIONS,
   TASK_STATUS_OPTIONS,
-  type CrmTask,
-  type CrmUser,
-  type TaskComment,
-  type TaskEvent,
   type TaskPriority,
   type TaskStatus,
 } from '@features/crm-auth/types';
+import { UseTasks } from "@shared/lib/hooks/crm/useTasks.tsx";
+import { UseUsers } from "@shared/lib/hooks/crm/useUsers.tsx";
+import type { DeadlineFilter } from '@shared/lib/hooks/crm/useTasks.tsx'
+import {UseTaskDetails} from "@shared/lib/hooks/crm/useTaskDetails.tsx";
+import {
+  eventLabel,
+  formatDateShort,
+  formatDateTime,
+  getPriorityLabel,
+  getStatusLabel,
+  isDueThisWeek,
+  isDueToday,
+  isOverdue,
+  isTaskOpen,
+  priorityClasses,
+  statusClasses
+} from '@/shared/functions/crm';
+import {CreateTaskModal} from "@entities/crm/CreateTaskModal.tsx";
 
-type DeadlineFilter = 'ALL' | 'OVERDUE' | 'TODAY' | 'WEEK';
 type DetailTab = 'CHAT' | 'HISTORY';
-
-interface TaskFiltersState {
-  status: TaskStatus | '';
-  priority: TaskPriority | '';
-  assigneeId: string;
-  search: string;
-  deadline: DeadlineFilter;
-}
-
-function formatDateTime(value: string | null): string {
-  if (!value) {
-    return '—';
-  }
-
-  return new Intl.DateTimeFormat('ru-RU', {
-    dateStyle: 'medium',
-    timeStyle: 'short',
-    timeZone: 'Europe/Moscow',
-  }).format(new Date(value));
-}
-
-function formatDateShort(value: string | null): string {
-  if (!value) {
-    return 'Без дедлайна';
-  }
-
-  return new Intl.DateTimeFormat('ru-RU', {
-    dateStyle: 'short',
-    timeStyle: 'short',
-    timeZone: 'Europe/Moscow',
-  }).format(new Date(value));
-}
-
-function isTaskOpen(task: CrmTask): boolean {
-  return task.status === 'NEW' || task.status === 'IN_PROGRESS' || task.status === 'BLOCKED';
-}
-
-function isOverdue(task: CrmTask): boolean {
-  if (!task.dueDate || !isTaskOpen(task)) {
-    return false;
-  }
-
-  return new Date(task.dueDate).getTime() < Date.now();
-}
-
-function isDueToday(task: CrmTask): boolean {
-  if (!task.dueDate) {
-    return false;
-  }
-
-  const due = new Date(task.dueDate);
-  const now = new Date();
-
-  return due.getFullYear() === now.getFullYear() && due.getMonth() === now.getMonth() && due.getDate() === now.getDate();
-}
-
-function isDueThisWeek(task: CrmTask): boolean {
-  if (!task.dueDate) {
-    return false;
-  }
-
-  const dueTime = new Date(task.dueDate).getTime();
-  const now = Date.now();
-  const week = now + 7 * 24 * 60 * 60 * 1000;
-
-  return dueTime >= now && dueTime <= week;
-}
-
-function statusClasses(status: TaskStatus): string {
-  switch (status) {
-    case 'NEW':
-      return 'bg-slate-100 text-slate-700 border-slate-200';
-    case 'IN_PROGRESS':
-      return 'bg-blue-100 text-blue-700 border-blue-200';
-    case 'BLOCKED':
-      return 'bg-amber-100 text-amber-700 border-amber-200';
-    case 'DONE':
-      return 'bg-emerald-100 text-emerald-700 border-emerald-200';
-    case 'CANCELED':
-      return 'bg-rose-100 text-rose-700 border-rose-200';
-    default:
-      return 'bg-slate-100 text-slate-700 border-slate-200';
-  }
-}
-
-function priorityClasses(priority: TaskPriority): string {
-  switch (priority) {
-    case 'LOW':
-      return 'bg-slate-100 text-slate-700 border-slate-200';
-    case 'NORMAL':
-      return 'bg-indigo-100 text-indigo-700 border-indigo-200';
-    case 'HIGH':
-      return 'bg-orange-100 text-orange-700 border-orange-200';
-    case 'URGENT':
-      return 'bg-red-100 text-red-700 border-red-200';
-    default:
-      return 'bg-slate-100 text-slate-700 border-slate-200';
-  }
-}
-
-function getStatusLabel(status: TaskStatus): string {
-  return TASK_STATUS_OPTIONS.find((item) => item.value === status)?.label ?? status;
-}
-
-function getPriorityLabel(priority: TaskPriority): string {
-  return TASK_PRIORITY_OPTIONS.find((item) => item.value === priority)?.label ?? priority;
-}
-
-function eventLabel(eventType: string): string {
-  switch (eventType) {
-    case 'TASK_CREATED':
-      return 'Задача создана';
-    case 'STATUS_CHANGED':
-      return 'Статус изменен';
-    case 'PRIORITY_CHANGED':
-      return 'Приоритет изменен';
-    case 'ASSIGNEE_CHANGED':
-      return 'Исполнитель изменен';
-    default:
-      return eventType;
-  }
-}
 
 export const CrmTasksPage = () => {
   const { user } = useCrmAuth();
-  const [tasks, setTasks] = useState<CrmTask[]>([]);
-  const [users, setUsers] = useState<CrmUser[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
+  const { users, loadUsers } = UseUsers()
+  const { tasks, isLoading, error,  setError, setFilters, loadTasks, filters } = UseTasks()
+  const { history, comments, setComments, isDetailLoading, loadTaskDetails} = UseTaskDetails()
 
   const [selectedTaskId, setSelectedTaskId] = useState<number | null>(null);
-  const [history, setHistory] = useState<TaskEvent[]>([]);
-  const [comments, setComments] = useState<TaskComment[]>([]);
-  const [isDetailLoading, setIsDetailLoading] = useState(false);
 
   const [activeTab, setActiveTab] = useState<DetailTab>('CHAT');
   const [statusComment, setStatusComment] = useState('');
-  const [chatInput, setChatInput] = useState('');
   const [isCommentSubmitting, setIsCommentSubmitting] = useState(false);
+  const [chatInput, setChatInput] = useState('');
 
   const [isCreateOpen, setIsCreateOpen] = useState(false);
-  const [isCreateSubmitting, setIsCreateSubmitting] = useState(false);
-
-  const [filters, setFilters] = useState<TaskFiltersState>({
-    status: '',
-    priority: '',
-    assigneeId: '',
-    search: '',
-    deadline: 'ALL',
-  });
-
-  const [createTaskForm, setCreateTaskForm] = useState<CreateTaskInput>({
-    title: '',
-    description: '',
-    priority: 'NORMAL',
-    assigneeId: null,
-    dueDate: null,
-  });
 
   const canManageTasks = user?.role === 'OWNER' || user?.role === 'MANAGER';
 
@@ -199,54 +68,9 @@ export const CrmTasksPage = () => {
   );
 
   const createAssigneeOptions = useMemo(
-    () => [{ value: '', label: 'Без назначения' }, ...users.map((crmUser) => ({ value: String(crmUser.id), label: crmUser.login }))],
-    [users],
+      () => [{ value: '', label: 'Без назначения' }, ...users.map((crmUser) => ({ value: String(crmUser.id), label: crmUser.login }))],
+      [users],
   );
-
-  const loadUsers = useCallback(async () => {
-    try {
-      const response = await crmApi.listUsers();
-      setUsers(response.users);
-    } catch {
-      setUsers([]);
-    }
-  }, []);
-
-  const loadTasks = useCallback(async () => {
-    setIsLoading(true);
-    setError('');
-
-    try {
-      const response = await crmApi.listTasks({
-        status: filters.status || undefined,
-        priority: filters.priority || undefined,
-        assigneeId: filters.assigneeId ? Number(filters.assigneeId) : undefined,
-      });
-      setTasks(response.tasks);
-    } catch {
-      setError('Не удалось загрузить задачи.');
-    } finally {
-      setIsLoading(false);
-    }
-  }, [filters.assigneeId, filters.priority, filters.status]);
-
-  const loadTaskDetails = useCallback(async (taskId: number) => {
-    setIsDetailLoading(true);
-
-    try {
-      const [historyResponse, commentsResponse] = await Promise.all([
-        crmApi.getTaskHistory(taskId),
-        crmApi.listTaskComments(taskId),
-      ]);
-      setHistory(historyResponse.events);
-      setComments(commentsResponse.comments);
-    } catch {
-      setHistory([]);
-      setComments([]);
-    } finally {
-      setIsDetailLoading(false);
-    }
-  }, []);
 
   useEffect(() => {
     void loadUsers();
@@ -393,39 +217,6 @@ export const CrmTasksPage = () => {
       setIsCommentSubmitting(false);
     }
   }, [chatInput, selectedTask]);
-
-  const handleCreateTask = useCallback(
-    async (event: React.FormEvent) => {
-      event.preventDefault();
-      setIsCreateSubmitting(true);
-      setError('');
-
-      try {
-        await crmApi.createTask({
-          title: createTaskForm.title.trim(),
-          description: createTaskForm.description?.trim() || undefined,
-          priority: createTaskForm.priority,
-          assigneeId: createTaskForm.assigneeId || null,
-          dueDate: createTaskForm.dueDate || null,
-        });
-
-        setCreateTaskForm({
-          title: '',
-          description: '',
-          priority: 'NORMAL',
-          assigneeId: null,
-          dueDate: null,
-        });
-        setIsCreateOpen(false);
-        await refreshAll();
-      } catch {
-        setError('Не удалось создать задачу.');
-      } finally {
-        setIsCreateSubmitting(false);
-      }
-    },
-    [createTaskForm, refreshAll],
-  );
 
   const isChatAllowed = useMemo(() => {
     if (!selectedTask || !user) {
@@ -868,81 +659,11 @@ export const CrmTasksPage = () => {
           )}
         </div>
       </section>
-
-      <Modal isOpen={isCreateOpen} onClose={() => setIsCreateOpen(false)} size="lg" labelledBy="create-task-title">
-        <div className="space-y-4">
-          <h2 id="create-task-title" className="text-xl font-black uppercase text-[#1a224f]">
-            Новая задача
-          </h2>
-
-          <form className="space-y-4" onSubmit={handleCreateTask}>
-            <Input
-              id="create-task-title-input"
-              label="Название"
-              value={createTaskForm.title}
-              onChange={(event) => setCreateTaskForm((prev) => ({ ...prev, title: event.target.value }))}
-              required
-              fullWidth
-            />
-
-            <div>
-              <label htmlFor="create-task-description" className="mb-1.5 block text-sm font-semibold font-['Inter'] text-slate-700">
-                Описание
-              </label>
-              <textarea
-                id="create-task-description"
-                value={createTaskForm.description || ''}
-                onChange={(event) => setCreateTaskForm((prev) => ({ ...prev, description: event.target.value }))}
-                rows={4}
-                className="w-full rounded-xl border border-slate-200/60 font-['Inter'] px-4 py-3 text-sm outline-none transition-all duration-300 focus:border-[#1a224f] focus:ring-2 focus:ring-[#1a224f]/20 shadow-sm hover:border-slate-300"
-              />
-            </div>
-
-            <div className="grid gap-3 md:grid-cols-3">
-              <Select
-                id="create-task-priority"
-                label="Приоритет"
-                value={createTaskForm.priority || 'NORMAL'}
-                onChange={(event) => setCreateTaskForm((prev) => ({ ...prev, priority: event.target.value as TaskPriority }))}
-                options={TASK_PRIORITY_OPTIONS}
-                fullWidth
-              />
-
-              <Select
-                id="create-task-assignee"
-                label="Исполнитель"
-                value={createTaskForm.assigneeId ? String(createTaskForm.assigneeId) : ''}
-                onChange={(event) =>
-                  setCreateTaskForm((prev) => ({
-                    ...prev,
-                    assigneeId: event.target.value ? Number(event.target.value) : null,
-                  }))
-                }
-                options={createAssigneeOptions}
-                fullWidth
-              />
-
-              <Input
-                id="create-task-due"
-                label="Дедлайн"
-                type="datetime-local"
-                value={createTaskForm.dueDate ? createTaskForm.dueDate.slice(0, 16) : ''}
-                onChange={(event) =>
-                  setCreateTaskForm((prev) => ({
-                    ...prev,
-                    dueDate: event.target.value ? new Date(event.target.value).toISOString() : null,
-                  }))
-                }
-                fullWidth
-              />
-            </div>
-
-            <Button type="submit" variant="primary" isLoading={isCreateSubmitting} fullWidth>
-              Создать задачу
-            </Button>
-          </form>
-        </div>
-      </Modal>
+      <CreateTaskModal
+          isCreateOpen={isCreateOpen}
+          setIsCreateOpen={setIsCreateOpen}
+          setSelectedTaskId={(selectedTaskId: number | any) => setSelectedTaskId}
+      />
     </div>
   );
 };
