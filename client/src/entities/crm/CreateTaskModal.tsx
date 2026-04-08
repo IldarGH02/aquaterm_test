@@ -4,14 +4,14 @@ import { Button, Input, Modal, Select } from "@shared/ui";
 import { TASK_PRIORITY_OPTIONS, TaskPriority } from "@features/crm-auth/types";
 import type { CreateTaskInput } from "@shared/api/types";
 import { crmApi } from "@shared/api/crm-api/crmApi.ts";
-import {UseUsers} from "@shared/lib/hooks/crm/useUsers.tsx";
+import { UseUsers } from "@shared/lib/hooks/crm/useUsers.tsx";
 import { UseTasks } from "@/shared/lib/hooks/crm/useTasks";
-import {UseTaskDetails} from "@shared/lib/hooks/crm/useTaskDetails.tsx";
+import { UseTaskDetails } from "@shared/lib/hooks/crm/useTaskDetails.tsx";
 
 interface ICreateTaskModal {
     isCreateOpen: boolean,
     setIsCreateOpen: (bool:boolean) => void
-    selectedTaskId: number
+    selectedTaskId: number | null
 }
 
 export const CreateTaskModal: FC<ICreateTaskModal> =
