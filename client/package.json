@@ -6,12 +6,12 @@
   "scripts": {
     "dev": "npm run dev:crm",
     "dev:front": "vite",
-    "dev:server": "tsx watch ../server/index.ts",
+    "dev:server": "tsx watch ../api/index.ts",
     "dev:crm": "concurrently -k \"npm run dev:server\" \"npm run dev:front\"",
     "build": "vite build",
     "preview": "vite preview",
-    "start:server": "tsx ../server/index.ts",
-    "test:crm": "tsx --test ../server/tests/**/*.test.ts"
+    "start:server": "tsx ../api/index.ts",
+    "test:crm": "tsx --test ../api/tests/**/*.test.ts"
   },
   "dependencies": {
     "@fastify/cookie": "^11.0.2",
