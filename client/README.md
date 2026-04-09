@@ -24,7 +24,7 @@ cd client
 npm install
 
 # 2. Установить зависимости сервера
-cd ../server
+cd ../api
 npm install
 
 # 3. Запустить проект (из папки client)

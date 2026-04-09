@@ -33,7 +33,7 @@ TypeScript is strict mode (`"strict": true`). No JavaScript files are permitted 
 # Install dependencies
 npm install
 
-# Start dev server (http://localhost:3000)
+# Start dev api (http://localhost:3000)
 npm run dev
 
 # Production build → dist/
