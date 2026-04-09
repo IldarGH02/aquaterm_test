@@ -21,7 +21,7 @@ import {
   type TaskStatus,
 } from '@features/crm-auth/types';
 import { useTasks } from "@shared/lib/hooks/crm/useTasks.tsx";
-import { UseUsers } from "@shared/lib/hooks/crm/useUsers.tsx";
+import { useUsers } from "@shared/lib/hooks/crm/useUsers.tsx";
 import type { DeadlineFilter } from '@shared/lib/hooks/crm/useTasks.tsx'
 import {
   eventLabel,
@@ -42,7 +42,7 @@ type DetailTab = 'CHAT' | 'HISTORY';
 
 export const CrmTasksPage = () => {
   const { user } = useCrmAuth();
-  const { users, loadUsers } = UseUsers()
+  const { users, loadUsers } = useUsers()
   const {
       tasks,
       isLoading,
@@ -262,7 +262,7 @@ export const CrmTasksPage = () => {
               </div>
             </div>
 
-            <div className="max-h-[72vh] overflow-y-auto p-3">
+            <div className="max-h-[fit-content] overflow-y-auto p-3">
               {isLoading && (
                   <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-500">
                     <Loader2 className="h-4 w-4 animate-spin" />

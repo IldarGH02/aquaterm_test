@@ -1,8 +1,8 @@
 import {useCallback, useEffect, useMemo, useState} from "react";
 import { crmApi } from "@shared/api/crm-api/crmApi.ts";
 import type {CrmTask, TaskComment, TaskEvent, TaskPriority, TaskStatus} from "@features/crm-auth/types";
-import {UseUsers} from "@shared/lib/hooks/crm/useUsers.tsx";
-import {isOverdue, isTaskOpen} from "@shared/functions/crm";
+import { useUsers } from "@shared/lib/hooks/crm/useUsers.tsx";
+import { isOverdue, isTaskOpen } from "@shared/functions/crm";
 
 export type DeadlineFilter = 'ALL' | 'OVERDUE' | 'TODAY' | 'WEEK';
 
@@ -15,7 +15,7 @@ interface TaskFiltersState {
 }
 
 export const useTasks = () => {
-    const { loadUsers } = UseUsers()
+    const { loadUsers } = useUsers()
 
     const [comments, setComments] = useState<TaskComment[]>([]);
     const [statusComment, setStatusComment] = useState('');

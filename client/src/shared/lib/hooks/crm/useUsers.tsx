@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { crmApi } from "@shared/api/crm-api/crmApi.ts";
 import { CrmUser } from "@features/crm-auth/types";
 
-export const UseUsers = () => {
+export const useUsers = () => {
     const [users, setUsers] = useState<CrmUser[]>([])
 
     const loadUsers = useCallback(async () => {

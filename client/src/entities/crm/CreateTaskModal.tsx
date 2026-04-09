@@ -4,9 +4,8 @@ import { Button, Input, Modal, Select } from "@shared/ui";
 import { TASK_PRIORITY_OPTIONS, TaskPriority } from "@features/crm-auth/types";
 import type { CreateTaskInput } from "@shared/api/types";
 import { crmApi } from "@shared/api/crm-api/crmApi.ts";
-import { UseUsers } from "@shared/lib/hooks/crm/useUsers.tsx";
-import { UseTasks } from "@/shared/lib/hooks/crm/useTasks";
-import { UseTaskDetails } from "@shared/lib/hooks/crm/useTaskDetails.tsx";
+import { useUsers } from "@shared/lib/hooks/crm/useUsers.tsx";
+import { useTasks } from "@/shared/lib/hooks/crm/useTasks";
 
 interface ICreateTaskModal {
     isCreateOpen: boolean,
@@ -31,9 +30,8 @@ export const CreateTaskModal: FC<ICreateTaskModal> =
         const [error, setError] = useState('');
         const [isCreateSubmitting, setIsCreateSubmitting] = useState(false);
 
-        const { loadUsers, users } = UseUsers()
-        const { loadTasks } = UseTasks()
-        const { loadTaskDetails } = UseTaskDetails()
+        const { loadUsers, users } = useUsers()
+        const { loadTasks, loadTaskDetails } = useTasks()
 
         const createAssigneeOptions = useMemo(
             () => [{ value: '', label: 'Без назначения' }, ...users.map((crmUser) => ({ value: String(crmUser.id), label: crmUser.login }))],

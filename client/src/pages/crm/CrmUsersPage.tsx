@@ -3,6 +3,7 @@ import { KeyRound, Loader2, ShieldUser, UserPlus2 } from 'lucide-react';
 import { Button, Input, Select } from '@shared/ui';
 import { crmApi } from '@shared/api/crm-api/crmApi.ts';
 import { USER_ROLE_OPTIONS, type CrmUser, type UserRole } from '@features/crm-auth/types';
+import {useUsers} from "@shared/lib/hooks/crm/useUsers.tsx";
 
 interface CreateUserFormState {
   login: string;
@@ -13,6 +14,7 @@ interface CreateUserFormState {
 }
 
 export const CrmUsersPage: React.FC = () => {
+  const { loadUsers } = useUsers()
   const [users, setUsers] = useState<CrmUser[]>([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -31,20 +33,6 @@ export const CrmUsersPage: React.FC = () => {
     () => USER_ROLE_OPTIONS.map((option) => ({ value: option.value, label: option.label })),
     [],
   );
-
-  const loadUsers = useCallback(async () => {
-    setIsLoading(true);
-    setError('');
-
-    try {
-      const response = await crmApi.listUsers();
-      setUsers(response.users);
-    } catch {
-      setError('Не удалось загрузить пользователей.');
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
 
   useEffect(() => {
     void loadUsers();
