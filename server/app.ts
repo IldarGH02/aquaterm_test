@@ -46,6 +46,15 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
 
   await authService.bootstrapOwner();
 
+  try {
+    const unclaimed = leadService.assignUnclaimedLeads();
+    if (unclaimed.assigned > 0 || unclaimed.skipped > 0) {
+      app.log.info(unclaimed, 'startup: unclaimed leads processed');
+    }
+  } catch (error) {
+    app.log.error({ error }, 'startup: failed to assign unclaimed leads');
+  }
+
   await app.register(cors, {
     origin: config.corsOrigin,
     credentials: true,

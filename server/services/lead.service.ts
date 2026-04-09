@@ -84,4 +84,46 @@ export class LeadService {
 
     return { leadId, taskId: task.id };
   }
+
+  assignUnclaimedLeads(): { assigned: number; skipped: number } {
+    const unclaimedLeads = this.db
+      .prepare(
+        `SELECT l.id, l.name, l.phone, l.service
+         FROM leads l
+         WHERE NOT EXISTS (SELECT 1 FROM tasks t WHERE t.lead_id = l.id)
+         ORDER BY l.id ASC`,
+      )
+      .all() as { id: number; name: string; phone: string; service: string | null }[];
+
+    let assigned = 0;
+    let skipped = 0;
+
+    for (const lead of unclaimedLeads) {
+      const managerId = this.pickManagerWithLeastOpenTasks();
+
+      if (!managerId) {
+        skipped++;
+        continue;
+      }
+
+      const input: ContactLeadInput = {
+        name: lead.name,
+        phone: lead.phone,
+        service: lead.service ?? '',
+      };
+
+      this.taskService.createTask(null, {
+        title: `Обработать лид: ${input.name}`,
+        description: buildLeadTaskDescription(input),
+        priority: 'NORMAL',
+        assigneeId: managerId,
+        dueDate: addHours(2),
+        leadId: lead.id,
+      });
+
+      assigned++;
+    }
+
+    return { assigned, skipped };
+  }
 }

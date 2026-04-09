@@ -26,8 +26,9 @@ export async function registerContactFormRoutes(fastify: FastifyInstance, leadSe
       });
 
       reply.send({ ok: true, leadId: result.leadId, taskId: result.taskId });
-    } catch {
-      // Keep UX resilient for the public landing form.
+    } catch (error) {
+      fastify.log.error({ error, leadName: parsed.data.name }, 'contact-form: lead creation failed');
+      // Still return ok:true — public landing UX stays resilient.
       reply.send({ ok: true });
     }
   });

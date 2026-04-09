@@ -1,0 +1,30 @@
+{
+  "name": "акватерм-—-инженерные-системы",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run dev:crm",
+    "dev:server": "tsx watch index.ts",
+    "dev:crm": "concurrently -k \"npm run dev:server\" \"npm run dev:front\"",
+    "start:server": "tsx index.ts",
+    "test:crm": "tsx --test tests/**/*.test.ts"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/cors": "^11.1.0",
+    "@fastify/rate-limit": "^10.3.0",
+    "@types/node": "^25.5.0",
+    "argon2": "^0.44.0",
+    "better-sqlite3": "^12.4.1",
+    "fastify": "^5.6.2",
+    "tsx": "^4.21.0",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "clsx": "^2.1.1",
+    "concurrently": "^9.2.1",
+    "typescript": "~5.8.2"
+  }
+}
