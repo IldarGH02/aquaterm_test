@@ -28,12 +28,12 @@ export interface BuildAppOptions {
 export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyInstance> {
   const app = Fastify({
     logger: {
-      level: process.env.LOG_LEVEL || 'info',
+      level: process.env.LOG_LEVEL ?? 'info',
     },
   });
 
   const ownDb = !options.db;
-  const db = options.db || getDb();
+  const db = options.db ?? getDb();
   if (options.db) {
     runMigrations(db);
   }
